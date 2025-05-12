@@ -1,3 +1,4 @@
+import 'package:elm_task/core/view/animated_splash_page.dart';
 import 'package:elm_task/features/auth/presentation/pages/login_page.dart';
 import 'package:elm_task/features/auth/presentation/pages/verify_page.dart';
 import 'package:elm_task/features/bus_track/presentation/screens/bus_tracks_page.dart';
@@ -13,13 +14,17 @@ class AppRouter {
   /// use for navigate without context
   static final GoRouter routes = GoRouter(
       navigatorKey: navKey,
-      initialLocation:
-          sl<GetStorage>().hasData(kVerify) ? Routes.incidents : Routes.login,
+      initialLocation: Routes.animatedSplash,
       routes: [
         GoRoute(
-          name: Routes.login,
-          path: Routes.login,
-          builder: (context, state) => const LoginPage(),
+          name: Routes.animatedSplash,
+          path: Routes.animatedSplash,
+          builder: (context, state) => AnimatedSplash(
+            home: Routes.login,
+            title: '',
+            duration: Duration.hoursPerDay,
+            type: AnimatedSplashType.StaticDuration,
+          ),
         ),
         GoRoute(
           name: Routes.verify,
