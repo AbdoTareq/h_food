@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:elm_task/features/auth/domain/entities/verify.dart';
-import 'package:elm_task/features/auth/domain/repositories/auth_repo.dart';
+import 'package:elm_task/features/info/domain/entities/verify.dart';
+import 'package:elm_task/features/info/domain/repositories/auth_repo.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/error/failures.dart';

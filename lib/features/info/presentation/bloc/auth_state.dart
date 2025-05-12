@@ -1,4 +1,4 @@
-import 'package:elm_task/features/auth/domain/entities/verify.dart';
+import 'package:elm_task/features/info/domain/entities/verify.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 

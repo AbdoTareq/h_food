@@ -1,7 +1,7 @@
 import 'package:elm_task/core/error/exceptions.dart';
 import 'package:elm_task/core/network/endpoints.dart';
 import 'package:elm_task/core/network/network.dart';
-import 'package:elm_task/features/auth/data/models/verify_model.dart';
+import 'package:elm_task/features/info/data/models/verify_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<bool> login(String email);

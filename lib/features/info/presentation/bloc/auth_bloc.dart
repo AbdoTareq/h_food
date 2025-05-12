@@ -1,8 +1,8 @@
 import 'package:elm_task/export.dart';
-import 'package:elm_task/features/auth/domain/usecases/login_usecase.dart';
-import 'package:elm_task/features/auth/domain/usecases/verify_usecase.dart';
-import 'package:elm_task/features/auth/presentation/bloc/auth_event.dart';
-import 'package:elm_task/features/auth/presentation/bloc/auth_state.dart';
+import 'package:elm_task/features/info/domain/usecases/login_usecase.dart';
+import 'package:elm_task/features/info/domain/usecases/verify_usecase.dart';
+import 'package:elm_task/features/info/presentation/bloc/auth_event.dart';
+import 'package:elm_task/features/info/presentation/bloc/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUsecase loginUseCase;

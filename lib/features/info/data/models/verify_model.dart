@@ -1,6 +1,6 @@
 import 'package:elm_task/core/error/exceptions.dart';
 import 'package:elm_task/export.dart';
-import 'package:elm_task/features/auth/domain/entities/verify.dart';
+import 'package:elm_task/features/info/domain/entities/verify.dart';
 
 class VerifyModel extends Verify {
   const VerifyModel({

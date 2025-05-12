@@ -1,31 +1,34 @@
 import 'package:elm_task/export.dart';
-import 'package:elm_task/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:elm_task/features/auth/presentation/bloc/auth_event.dart';
-import 'package:elm_task/features/auth/presentation/bloc/auth_state.dart';
+import 'package:elm_task/features/info/presentation/bloc/auth_bloc.dart';
+import 'package:elm_task/features/info/presentation/bloc/auth_event.dart';
+import 'package:elm_task/features/info/presentation/bloc/auth_state.dart';
 
-class VerifyPage extends StatefulWidget {
-  const VerifyPage({super.key, required this.email});
-  final String email;
+class InfoDetailsPage extends StatefulWidget {
+  const InfoDetailsPage({super.key});
 
   @override
-  State<VerifyPage> createState() => _VerifyPageState();
+  State<InfoDetailsPage> createState() => _InfoDetailsPageState();
 }
 
-class _VerifyPageState extends State<VerifyPage> {
+class _InfoDetailsPageState extends State<InfoDetailsPage> {
   final GlobalKey<FormState> formKey = GlobalKey();
-
-  final otpTextController = TextEditingController();
+  final weightTextController = TextEditingController();
+  final heightTextController = TextEditingController();
+  final ageTextController = TextEditingController();
+  String gender = 'male';
 
   @override
   void dispose() {
-    otpTextController.dispose();
+    weightTextController.dispose();
+    heightTextController.dispose();
+    ageTextController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: context.t.verify),
+      appBar: CustomAppBar(title: context.t.login),
       body: BlocProvider(
         create: (context) => sl<AuthBloc>(),
         child: Form(
@@ -39,32 +42,36 @@ class _VerifyPageState extends State<VerifyPage> {
                 children: [
                   FlutterLogo(size: 300),
                   TextInput(
-                    controller: otpTextController,
-                    hint: context.t.otp,
-                    inputType: TextInputType.number,
+                    controller: weightTextController,
+                    hint: context.t.email,
                     validate: (value) =>
-                        value!.length > 3 ? null : context.t.required,
+                        isEmail(value) ? null : context.t.required,
                   ),
                   BlocConsumer<AuthBloc, AuthState>(
                     listener: (context, state) {
                       if (state is AuthError) {
                         showFailSnack(message: state.message);
                       }
-                      if (state is VerifySuccess) {
-                        showSuccessSnack(message: context.t.welcome);
-                        context.goNamed(Routes.incidents);
+                      if (state is LoginSuccess) {
+                        if (state.success) {
+                          showSuccessSnack(message: context.t.success);
+                          // context.pushNamed(
+                          //   Routes.verify,
+                          //   extra: weightTextController.text,
+                          // );
+                        } else {
+                          showFailSnack(message: context.t.failed);
+                        }
                       }
                     },
                     builder: (context, state) {
                       return RoundedCornerButton(
-                        text: context.t.verify,
+                        text: context.t.loginToYourAccount,
                         isLoading: state is AuthLoading,
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
                             context.read<AuthBloc>().add(
-                                  VerifyEvent(
-                                      email: widget.email,
-                                      otp: otpTextController.text),
+                                  LoginEvent(weightTextController.text),
                                 );
                           }
                         },

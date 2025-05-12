@@ -9,7 +9,7 @@ export 'core/view/widgets/custom_app_bar.dart';
 export 'core/theme.dart';
 export 'core/app_colors.dart';
 export 'core/datasources/local_data_source.dart';
-export 'features/auth/data/datasources/auth_remote_data_source.dart';
+export 'features/info/data/datasources/auth_remote_data_source.dart';
 // utils
 export 'core/utils/utils.dart';
 export 'core/constants.dart';

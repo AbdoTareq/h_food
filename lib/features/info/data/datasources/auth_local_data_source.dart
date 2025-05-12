@@ -1,6 +1,6 @@
 import 'package:elm_task/core/error/exceptions.dart';
 import 'package:elm_task/export.dart';
-import 'package:elm_task/features/auth/data/models/verify_model.dart';
+import 'package:elm_task/features/info/data/models/verify_model.dart';
 
 abstract class AuthLocalDataSource {
   Future<VerifyModel> getVerify(String email, String otp);

@@ -1,6 +1,4 @@
 import 'package:elm_task/core/view/animated_splash_page.dart';
-import 'package:elm_task/features/auth/presentation/pages/login_page.dart';
-import 'package:elm_task/features/auth/presentation/pages/verify_page.dart';
 import 'package:elm_task/features/bus_track/presentation/screens/bus_tracks_page.dart';
 import 'package:elm_task/features/incidents/presentation/pages/dashboard_page.dart';
 import 'package:elm_task/features/incidents/presentation/pages/incidents_page.dart';
@@ -20,16 +18,11 @@ class AppRouter {
           name: Routes.animatedSplash,
           path: Routes.animatedSplash,
           builder: (context, state) => AnimatedSplash(
-            home: Routes.login,
+            home: Routes.info,
             title: '',
             duration: Duration.hoursPerDay,
             type: AnimatedSplashType.StaticDuration,
           ),
-        ),
-        GoRoute(
-          name: Routes.verify,
-          path: Routes.verify,
-          builder: (context, state) => VerifyPage(email: state.extra as String),
         ),
         GoRoute(
           name: Routes.incidents,
