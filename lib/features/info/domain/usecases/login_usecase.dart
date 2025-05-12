@@ -5,10 +5,10 @@ import 'package:equatable/equatable.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
 
-class LoginUsecase implements UseCase<bool, LoginParams> {
+class SaveInfoUsecase implements UseCase<bool, LoginParams> {
   final AuthRepo repository;
 
-  LoginUsecase(this.repository);
+  SaveInfoUsecase(this.repository);
 
   @override
   Future<Either<Failure, bool>> call(LoginParams params) async {

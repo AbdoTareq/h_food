@@ -3,7 +3,7 @@ import '../../../export.dart';
 late String _homePath;
 late int _duration;
 
-enum AnimatedSplashType { StaticDuration, BackgroundProcess }
+enum AnimatedSplashType { staticDuration, backgroundProcess }
 
 class AnimatedSplash extends StatefulWidget {
   AnimatedSplash(
@@ -48,7 +48,7 @@ class AnimatedSplashState extends State<AnimatedSplash>
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
-        onTap: () => context.goNamed(_homePath),
+        onTap: () => context.pushNamed(_homePath),
         child: FadeTransition(
           opacity: _animation,
           child: Image.asset(

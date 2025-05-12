@@ -1,7 +1,8 @@
+import 'package:elm_task/core/view/widgets/custom_dropdown_field.dart';
 import 'package:elm_task/export.dart';
-import 'package:elm_task/features/info/presentation/bloc/auth_bloc.dart';
-import 'package:elm_task/features/info/presentation/bloc/auth_event.dart';
-import 'package:elm_task/features/info/presentation/bloc/auth_state.dart';
+import 'package:elm_task/features/info/presentation/bloc/info_details_bloc.dart';
+import 'package:elm_task/features/info/presentation/bloc/info_details_event.dart';
+import 'package:elm_task/features/info/presentation/bloc/info_details_state.dart';
 
 class InfoDetailsPage extends StatefulWidget {
   const InfoDetailsPage({super.key});
@@ -15,22 +16,24 @@ class _InfoDetailsPageState extends State<InfoDetailsPage> {
   final weightTextController = TextEditingController();
   final heightTextController = TextEditingController();
   final ageTextController = TextEditingController();
-  String gender = 'male';
+  final genderTextController = TextEditingController();
 
   @override
   void dispose() {
     weightTextController.dispose();
     heightTextController.dispose();
     ageTextController.dispose();
+    genderTextController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: context.t.login),
+      backgroundColor: kFBFBFBColor,
+      appBar: CustomAppBar(title: context.t.enterDetails),
       body: BlocProvider(
-        create: (context) => sl<AuthBloc>(),
+        create: (context) => sl<InfoDetailsBloc>(),
         child: Form(
           key: formKey,
           child: Padding(
@@ -40,19 +43,49 @@ class _InfoDetailsPageState extends State<InfoDetailsPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 spacing: 32,
                 children: [
-                  FlutterLogo(size: 300),
+                  CustomDropdownFormField<String>(
+                    title: context.t.gender,
+                    hint: context.t.chooseYourGender,
+                    validator: (value) {
+                      return value?.length != null ? null : context.t.required;
+                    },
+                    onChanged: (p0) => genderTextController.text = p0!,
+                    items: [context.t.male, context.t.female],
+                  ),
                   TextInput(
                     controller: weightTextController,
-                    hint: context.t.email,
+                    title: context.t.weight,
+                    hint: context.t.enterYourWeight,
+                    inputType: TextInputType.number,
+                    suffixIcon: Text(context.t.kg,
+                        style: Theme.of(context).textTheme.labelLarge),
                     validate: (value) =>
-                        isEmail(value) ? null : context.t.required,
+                        value!.length > 2 ? null : context.t.required,
                   ),
-                  BlocConsumer<AuthBloc, AuthState>(
+                  TextInput(
+                    controller: heightTextController,
+                    title: context.t.height,
+                    hint: context.t.enterYourHeight,
+                    inputType: TextInputType.number,
+                    suffixIcon: Text(context.t.cm,
+                        style: Theme.of(context).textTheme.labelLarge),
+                    validate: (value) =>
+                        value!.length > 1 ? null : context.t.required,
+                  ),
+                  TextInput(
+                    controller: ageTextController,
+                    title: context.t.age,
+                    hint: context.t.enterYourAge,
+                    inputType: TextInputType.number,
+                    validate: (value) =>
+                        value!.length > 2 ? null : context.t.required,
+                  ),
+                  BlocConsumer<InfoDetailsBloc, InfoState>(
                     listener: (context, state) {
-                      if (state is AuthError) {
+                      if (state is InfoError) {
                         showFailSnack(message: state.message);
                       }
-                      if (state is LoginSuccess) {
+                      if (state is InfoSuccess) {
                         if (state.success) {
                           showSuccessSnack(message: context.t.success);
                           // context.pushNamed(
@@ -66,12 +99,17 @@ class _InfoDetailsPageState extends State<InfoDetailsPage> {
                     },
                     builder: (context, state) {
                       return RoundedCornerButton(
-                        text: context.t.loginToYourAccount,
-                        isLoading: state is AuthLoading,
+                        text: context.t.next,
+                        isLoading: state is InfoLoading,
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
-                            context.read<AuthBloc>().add(
-                                  LoginEvent(weightTextController.text),
+                            context.read<InfoDetailsBloc>().add(
+                                  SaveInfoEvent(
+                                    weight: weightTextController.text,
+                                    height: heightTextController.text,
+                                    age: ageTextController.text,
+                                    gender: genderTextController.text,
+                                  ),
                                 );
                           }
                         },

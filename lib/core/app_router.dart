@@ -2,6 +2,7 @@ import 'package:elm_task/core/view/animated_splash_page.dart';
 import 'package:elm_task/features/bus_track/presentation/screens/bus_tracks_page.dart';
 import 'package:elm_task/features/incidents/presentation/pages/dashboard_page.dart';
 import 'package:elm_task/features/incidents/presentation/pages/incidents_page.dart';
+import 'package:elm_task/features/info/presentation/pages/info_details_page.dart';
 
 import '../../export.dart';
 
@@ -21,8 +22,13 @@ class AppRouter {
             home: Routes.info,
             title: '',
             duration: Duration.hoursPerDay,
-            type: AnimatedSplashType.StaticDuration,
+            type: AnimatedSplashType.staticDuration,
           ),
+        ),
+        GoRoute(
+          name: Routes.info,
+          path: Routes.info,
+          builder: (context, state) => const InfoDetailsPage(),
         ),
         GoRoute(
           name: Routes.incidents,

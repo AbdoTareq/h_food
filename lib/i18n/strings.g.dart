@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 416 (208 per locale)
+/// Strings: 462 (231 per locale)
 ///
-/// Built on 2025-01-21 at 06:24 UTC
+/// Built on 2025-05-12 at 16:48 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -159,6 +159,29 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get incidents => 'Incidents';
 	String get changeStatus => 'Change Status';
 	String get verify => 'Verify';
+	String get enterDetails => 'Enter your details';
+	String get age => 'Age';
+	String get meats => 'Meats';
+	String get cal => 'Cal';
+	String get male => 'Male';
+	String get female => 'Female';
+	String get confirm => 'Confirm';
+	String get outOf => 'out of';
+	String get orderSummary => 'Order summary';
+	String get placeOrder => 'Place order';
+	String get carbs => 'Carbs';
+	String get vegetables => 'Vegetables';
+	String get createOrder => 'Create your order';
+	String get next => 'Next';
+	String get weight => 'Weight';
+	String get height => 'Height';
+	String get kg => 'Kg';
+	String get cm => 'Cm';
+	String get gender => 'Gender';
+	String get chooseYourGender => 'Choose your gender';
+	String get enterYourWeight => 'Enter your weight';
+	String get enterYourHeight => 'Enter your height';
+	String get enterYourAge => 'Enter your age';
 	String get startDate => 'Incidents after Start Date';
 	String get login => 'login';
 	String get remember => 'remember';
@@ -395,6 +418,29 @@ class _StringsAr implements Translations {
 	@override String get startDate => 'تاريخ البدء';
 	@override String get confirmCode => 'كود التحقيق';
 	@override String get save => 'حفظ';
+	@override String get enterDetails => 'أدخل التفاصيل الخاصة بك';
+	@override String get age => 'عمر';
+	@override String get meats => 'اللحوم';
+	@override String get cal => 'كال';
+	@override String get male => 'ذكر';
+	@override String get female => 'أنثى';
+	@override String get confirm => 'يتأكد';
+	@override String get outOf => 'خارج';
+	@override String get orderSummary => 'ملخص الطلب';
+	@override String get placeOrder => 'ترتيب المكان';
+	@override String get carbs => 'الكربوهيدرات';
+	@override String get vegetables => 'الخضروات';
+	@override String get gender => 'Gender';
+	@override String get chooseYourGender => 'Choose your gender';
+	@override String get enterYourWeight => 'Enter your weight';
+	@override String get enterYourHeight => 'Enter your height';
+	@override String get enterYourAge => 'Enter your age';
+	@override String get createOrder => 'قم بإنشاء طلبك';
+	@override String get kg => 'كغ';
+	@override String get cm => 'سم';
+	@override String get next => 'التالي';
+	@override String get weight => 'وزن';
+	@override String get height => 'ارتفاع';
 	@override String get dashboard => 'لوحة التحكم';
 	@override String get incidentStatus => 'حالة الحادث';
 	@override String get login => 'تسجيل الدخول';
@@ -609,6 +655,29 @@ extension on Translations {
 			case 'incidents': return 'Incidents';
 			case 'changeStatus': return 'Change Status';
 			case 'verify': return 'Verify';
+			case 'enterDetails': return 'Enter your details';
+			case 'age': return 'Age';
+			case 'meats': return 'Meats';
+			case 'cal': return 'Cal';
+			case 'male': return 'Male';
+			case 'female': return 'Female';
+			case 'confirm': return 'Confirm';
+			case 'outOf': return 'out of';
+			case 'orderSummary': return 'Order summary';
+			case 'placeOrder': return 'Place order';
+			case 'carbs': return 'Carbs';
+			case 'vegetables': return 'Vegetables';
+			case 'createOrder': return 'Create your order';
+			case 'next': return 'Next';
+			case 'weight': return 'Weight';
+			case 'height': return 'Height';
+			case 'kg': return 'Kg';
+			case 'cm': return 'Cm';
+			case 'gender': return 'Gender';
+			case 'chooseYourGender': return 'Choose your gender';
+			case 'enterYourWeight': return 'Enter your weight';
+			case 'enterYourHeight': return 'Enter your height';
+			case 'enterYourAge': return 'Enter your age';
 			case 'startDate': return 'Incidents after Start Date';
 			case 'login': return 'login';
 			case 'remember': return 'remember';
@@ -827,6 +896,29 @@ extension on _StringsAr {
 			case 'startDate': return 'تاريخ البدء';
 			case 'confirmCode': return 'كود التحقيق';
 			case 'save': return 'حفظ';
+			case 'enterDetails': return 'أدخل التفاصيل الخاصة بك';
+			case 'age': return 'عمر';
+			case 'meats': return 'اللحوم';
+			case 'cal': return 'كال';
+			case 'male': return 'ذكر';
+			case 'female': return 'أنثى';
+			case 'confirm': return 'يتأكد';
+			case 'outOf': return 'خارج';
+			case 'orderSummary': return 'ملخص الطلب';
+			case 'placeOrder': return 'ترتيب المكان';
+			case 'carbs': return 'الكربوهيدرات';
+			case 'vegetables': return 'الخضروات';
+			case 'gender': return 'Gender';
+			case 'chooseYourGender': return 'Choose your gender';
+			case 'enterYourWeight': return 'Enter your weight';
+			case 'enterYourHeight': return 'Enter your height';
+			case 'enterYourAge': return 'Enter your age';
+			case 'createOrder': return 'قم بإنشاء طلبك';
+			case 'kg': return 'كغ';
+			case 'cm': return 'سم';
+			case 'next': return 'التالي';
+			case 'weight': return 'وزن';
+			case 'height': return 'ارتفاع';
 			case 'dashboard': return 'لوحة التحكم';
 			case 'incidentStatus': return 'حالة الحادث';
 			case 'login': return 'تسجيل الدخول';

@@ -16,7 +16,7 @@ class TextInput extends StatefulWidget {
     this.onTap,
     this.disableInput = false,
     this.enabled = true,
-    this.borderColor = kPrimaryColor,
+    this.borderColor = kEAECF0Color,
     this.validate,
     this.suffixIcon,
     this.prefixIcon,
@@ -32,11 +32,13 @@ class TextInput extends StatefulWidget {
     this.maxLines,
     this.contentPadding,
     this.cursorColor,
+    required this.title,
   });
 
   final FocusNode? focus;
   final Function? function;
   final String hint;
+  final String title;
   final bool spaceAfter;
   final TextInputType? inputType;
   final int? maxLength;
@@ -70,74 +72,90 @@ class TextInput extends StatefulWidget {
 class _TextInputState extends State<TextInput> {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      autofillHints: widget.autofillHints,
-      onTapOutside: (event) => FocusManager.instance.primaryFocus!.unfocus(),
-      controller: widget.controller,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      decoration: InputDecoration(
-        alignLabelWithHint: false,
-        // to hide maxLength counter
-        counterText: '',
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
-        contentPadding: widget.contentPadding ?? const EdgeInsets.all(16),
-        errorStyle: const TextStyle(fontSize: 12, height: 0.8),
-        filled: widget.color != null,
-        fillColor: widget.color,
-        hintStyle: context.textTheme.labelSmall,
-        labelStyle: context.textTheme.labelSmall,
-        labelText: widget.hint.toTitleCase(),
-        suffixIcon: widget.suffixIcon,
-        suffixIconConstraints: const BoxConstraints(
-          minWidth: 80,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.title.toTitleCase(),
+          style: Theme.of(context)
+              .textTheme
+              .labelLarge
+              ?.copyWith(color: k474747Color),
         ),
-        prefixIcon: widget.prefixIcon,
-        prefixIconConstraints: const BoxConstraints(
-          minWidth: 80,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: BorderSide(
-            color: widget.borderColor,
+        10.heightBox,
+        TextFormField(
+          autofillHints: widget.autofillHints,
+          onTapOutside: (event) =>
+              FocusManager.instance.primaryFocus!.unfocus(),
+          controller: widget.controller,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(
+            alignLabelWithHint: false,
+            // to hide maxLength counter
+            counterText: '',
+            floatingLabelBehavior: FloatingLabelBehavior.auto,
+            contentPadding: widget.contentPadding ?? const EdgeInsets.all(20),
+            errorStyle: const TextStyle(fontSize: 12, height: 0.8),
+            filled: true,
+            fillColor: kWhite,
+            hintStyle:
+                context.textTheme.bodyLarge?.copyWith(color: k959595Color),
+            labelStyle:
+                context.textTheme.bodyLarge?.copyWith(color: k959595Color),
+            labelText: widget.hint.toTitleCase(),
+            suffixIcon: widget.suffixIcon,
+            suffixIconConstraints: const BoxConstraints(
+              minWidth: 40,
+            ),
+            prefixIcon: widget.prefixIcon,
+            prefixIconConstraints: const BoxConstraints(
+              minWidth: 80,
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.0),
+              borderSide: BorderSide(
+                color: widget.borderColor,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.0),
+              borderSide: BorderSide(
+                color: widget.borderColor,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.0),
+              borderSide: BorderSide(
+                color: widget.borderColor,
+              ),
+            ),
           ),
+          onTap: widget.onTap,
+          cursorColor: widget.cursorColor ?? widget.borderColor,
+          onChanged: widget.onChanged,
+          minLines: widget.minLines,
+          maxLines: widget.maxLines,
+          textInputAction: TextInputAction.next,
+          autofocus: widget.registerFocus,
+          enableInteractiveSelection: !widget.disableInput,
+          enabled: widget.enabled,
+          keyboardType: widget.inputType,
+          obscureText: widget.isPass,
+          inputFormatters: [
+            if (widget.inputType == TextInputType.number)
+              FilteringTextInputFormatter.allow(RegExp("[-0-9,.]")),
+          ],
+          readOnly: widget.disableInput,
+          maxLength: widget.maxLength,
+          onFieldSubmitted: (v) async {
+            FocusScope.of(context).requestFocus(widget.focus);
+            try {
+              await widget.function!();
+            } catch (e) {}
+          },
+          validator: widget.validate,
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: BorderSide(
-            color: widget.borderColor,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: BorderSide(
-            color: widget.borderColor,
-          ),
-        ),
-      ),
-      onTap: widget.onTap,
-      cursorColor: widget.cursorColor ?? widget.borderColor,
-      onChanged: widget.onChanged,
-      minLines: widget.minLines,
-      maxLines: widget.maxLines,
-      textInputAction: TextInputAction.next,
-      autofocus: widget.registerFocus,
-      enableInteractiveSelection: !widget.disableInput,
-      enabled: widget.enabled,
-      keyboardType: widget.inputType,
-      obscureText: widget.isPass,
-      inputFormatters: [
-        if (widget.inputType == TextInputType.number)
-          FilteringTextInputFormatter.allow(RegExp("[-0-9,.]")),
       ],
-      readOnly: widget.disableInput,
-      maxLength: widget.maxLength,
-      onFieldSubmitted: (v) async {
-        FocusScope.of(context).requestFocus(widget.focus);
-        try {
-          await widget.function!();
-        } catch (e) {}
-      },
-      validator: widget.validate,
     );
   }
 }

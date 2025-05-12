@@ -1,14 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:elm_task/core/datasources/secure_local_data_source.dart';
 import 'package:elm_task/core/network/network.dart';
 import 'package:elm_task/core/network/network_info.dart';
-import 'package:elm_task/core/datasources/secure_local_data_source.dart';
 import 'package:elm_task/export.dart';
-import 'package:elm_task/features/info/data/datasources/auth_local_data_source.dart';
-import 'package:elm_task/features/info/data/repositories/repo_imp.dart';
-import 'package:elm_task/features/info/domain/repositories/auth_repo.dart';
-import 'package:elm_task/features/info/domain/usecases/login_usecase.dart';
-import 'package:elm_task/features/info/domain/usecases/verify_usecase.dart';
-import 'package:elm_task/features/info/presentation/bloc/auth_bloc.dart';
 import 'package:elm_task/features/bus_track/data/datasources/bus_tracks_remote_data_source.dart';
 import 'package:elm_task/features/bus_track/data/repositories/repo_imp.dart';
 import 'package:elm_task/features/bus_track/domain/repositories/bus_tracks_repo.dart';
@@ -23,6 +17,11 @@ import 'package:elm_task/features/incidents/domain/usecases/create_incident_usec
 import 'package:elm_task/features/incidents/domain/usecases/get_all_incidents_usecase.dart';
 import 'package:elm_task/features/incidents/domain/usecases/incs_status_usecase.dart';
 import 'package:elm_task/features/incidents/presentation/bloc/incidents_bloc.dart';
+import 'package:elm_task/features/info/data/datasources/auth_local_data_source.dart';
+import 'package:elm_task/features/info/data/repositories/repo_imp.dart';
+import 'package:elm_task/features/info/domain/repositories/auth_repo.dart';
+import 'package:elm_task/features/info/domain/usecases/login_usecase.dart';
+import 'package:elm_task/features/info/presentation/bloc/info_details_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -34,7 +33,7 @@ Future<void> init() async {
   //! Features
   // Bloc
   sl.registerFactory(
-    () => AuthBloc(loginUseCase: sl(), verifyUseCase: sl()),
+    () => InfoDetailsBloc(infoUseCase: sl()),
   );
   sl.registerFactory(
     () => IncidentsBloc(
@@ -48,8 +47,7 @@ Future<void> init() async {
     () => BusTracksBloc(getAllBusTracksUsecase: sl()),
   );
   // Usecases
-  sl.registerLazySingleton(() => LoginUsecase(sl()));
-  sl.registerLazySingleton(() => VerifyUsecase(sl()));
+  sl.registerLazySingleton(() => SaveInfoUsecase(sl()));
   sl.registerLazySingleton(() => GetAllIncidentsUsecase(sl()));
   sl.registerLazySingleton(() => CreateIncidentUsecase(sl()));
   sl.registerLazySingleton(() => ChangeStatusIncidentUsecase(sl()));

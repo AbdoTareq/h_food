@@ -7,7 +7,7 @@ final lightTheme = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor: kLight,
   textTheme: lightTextTheme,
-  fontFamily: GoogleFonts.alexandria().fontFamily,
+  fontFamily: GoogleFonts.questrial().fontFamily,
   appBarTheme: const AppBarTheme(
     backgroundColor: kLight,
     elevation: 0,
@@ -39,7 +39,7 @@ final darkTheme = ThemeData(
   primaryColor: kPrimaryColor,
   brightness: Brightness.dark,
   textTheme: darkTextTheme,
-  fontFamily: GoogleFonts.alexandria().fontFamily,
+  fontFamily: GoogleFonts.questrial().fontFamily,
   scaffoldBackgroundColor: kDark,
   appBarTheme: const AppBarTheme(
     backgroundColor: kDark,

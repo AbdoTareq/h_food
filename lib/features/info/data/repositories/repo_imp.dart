@@ -31,22 +31,4 @@ class AuthRepoImp implements AuthRepo {
           OfflineFailure(message: 'please connect to internet', data: null));
     }
   }
-
-  @override
-  Future<Either<Failure, Verify>> verifyOtp(String email, String otp) async {
-    if (await networkInfo.isConnected) {
-      try {
-        final res = await remoteDataSource.verifyOtp(email, otp);
-        localDataSource.saveVerify(res);
-        return Right(res);
-      } on ServerException {
-        return Left(ServerFailure(message: 'server failure', data: null));
-      } on SerializeException {
-        return Left(SerializeFailure(message: 'server failure', data: null));
-      }
-    } else {
-      return const Left(
-          OfflineFailure(message: 'please connect to internet', data: null));
-    }
-  }
 }

@@ -9,7 +9,6 @@ import 'package:elm_task/features/incidents/presentation/bloc/incidents_state.da
 abstract class IncidentsRemoteDataSource {
   Future<IncidentsModel> getAll();
   Future<IncidentsModel> create(IncidentModel item);
-  Future<IncidentModel> changeStatus(String id, IncidentStatus status);
   Future<IncidentsStatusModel> getIncidentsReport();
 }
 
@@ -21,7 +20,7 @@ class IncidentsRemoteDataSourceImp implements IncidentsRemoteDataSource {
   @override
   Future<IncidentsModel> getAll() async {
     final response =
-        await network.get('${Endpoints.incident}?startDate=2021-11-14', {});
+        await network.get('${Endpoints.placeOrder}?startDate=2021-11-14', {});
     if (response.statusCode == 200) {
       return IncidentsModel.fromJson(response.data);
     }
@@ -29,20 +28,8 @@ class IncidentsRemoteDataSourceImp implements IncidentsRemoteDataSource {
   }
 
   @override
-  Future<IncidentModel> changeStatus(String id, IncidentStatus status) async {
-    final response = await network.put('${Endpoints.incident}/change-status', {
-      "incidentId": id,
-      "status": status.index,
-    });
-    if (response.statusCode == 200) {
-      return IncidentModel.fromJson(response.data);
-    }
-    throw ServerException();
-  }
-
-  @override
   Future<IncidentsModel> create(IncidentModel item) async {
-    final response = await network.post(Endpoints.incident, item.toJson());
+    final response = await network.post(Endpoints.placeOrder, item.toJson());
     if (response.statusCode == 200) {
       return IncidentsModel.fromJson(response.data);
     }

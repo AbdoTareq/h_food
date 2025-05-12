@@ -14,7 +14,7 @@ class BusTracksRemoteDataSourceImp implements BusTracksRemoteDataSource {
 
   @override
   Future<BusTracksModel> getAll() async {
-    final response = await network.get(Endpoints.busTrack, {});
+    final response = await network.get(Endpoints.placeOrder, {});
     if (response.statusCode == 200) {
       return BusTracksModel.fromJson(response.data);
     }

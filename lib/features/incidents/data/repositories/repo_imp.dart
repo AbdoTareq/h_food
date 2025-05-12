@@ -52,22 +52,6 @@ class IncidentsRepoImp implements IncidentsRepo {
   }
 
   @override
-  Future<Either<Failure, Incident>> changeStatus(
-      String id, IncidentStatus status) async {
-    if (await networkInfo.isConnected) {
-      try {
-        final res = await remoteDataSource.changeStatus(id, status);
-        return Right(res);
-      } on ServerException {
-        return Left(ServerFailure(message: 'server failure', data: null));
-      }
-    } else {
-      return const Left(
-          OfflineFailure(message: 'please connect to internet', data: null));
-    }
-  }
-
-  @override
   Future<Either<Failure, IncsStatus>> getIncidentsReport() async {
     if (await networkInfo.isConnected) {
       try {
@@ -80,5 +64,12 @@ class IncidentsRepoImp implements IncidentsRepo {
       return const Left(
           OfflineFailure(message: 'please connect to internet', data: null));
     }
+  }
+
+  @override
+  Future<Either<Failure, Incident>> changeStatus(
+      String id, IncidentStatus status) {
+    // TODO: implement changeStatus
+    throw UnimplementedError();
   }
 }

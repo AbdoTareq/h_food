@@ -1,3 +1,5 @@
+import 'package:google_fonts/google_fonts.dart';
+
 import '../../../export.dart';
 
 class RoundedCornerButton extends StatelessWidget {
@@ -39,7 +41,7 @@ class RoundedCornerButton extends StatelessWidget {
                               Colors.transparent),
                           shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(12),
                             side: const BorderSide(color: kPrimaryColor),
                           )))
                       : ButtonStyle(
@@ -47,14 +49,14 @@ class RoundedCornerButton extends StatelessWidget {
                               color ?? kPrimaryColor),
                           shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(12),
                                   side: BorderSide(
                                       color:
                                           borderColor ?? Colors.transparent)))),
                   onPressed: onPressed,
                   child: Text(
                     text.toTitleCase(),
-                    style: context.textTheme.titleLarge?.copyWith(
+                    style: context.textTheme.titleMedium?.copyWith(
                       color: isOutlined ? null : kWhite,
                     ),
                   )),
