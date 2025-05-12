@@ -21,10 +21,10 @@ class InfoError extends InfoState {
 }
 
 class InfoSuccess extends InfoState {
-  final bool success;
+  final num calories;
 
-  InfoSuccess({required this.success});
+  InfoSuccess({required this.calories});
 
   @override
-  List<Object> get props => [success];
+  List<Object> get props => [calories];
 }

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:elm_task/core/error/failures.dart';
 
-abstract class AuthRepo {
-  Future<Either<Failure, bool>> login(String email);
+abstract class InfoRepo {
+  Future<Either<Failure, num>> calculateCalories(
+      num weight, num height, num age, String gender);
 }

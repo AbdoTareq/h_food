@@ -1,5 +1,5 @@
 import 'package:elm_task/export.dart';
-import 'package:elm_task/features/info/domain/usecases/login_usecase.dart';
+import 'package:elm_task/features/info/domain/usecases/save_info_usecase.dart';
 import 'package:elm_task/features/info/presentation/bloc/info_details_event.dart';
 import 'package:elm_task/features/info/presentation/bloc/info_details_state.dart';
 
@@ -14,10 +14,14 @@ class InfoDetailsBloc extends Bloc<InfoEvent, InfoState> {
 
   Future<void> _save(SaveInfoEvent event, Emitter<InfoState> emit) async {
     emit(InfoLoading());
-    final result = await infoUseCase(LoginParams(email: event.age));
+    final result = await infoUseCase(InfoParams(
+        weight: event.weight.toDouble,
+        height: event.height.toDouble,
+        gender: event.gender,
+        age: event.age.toDouble));
     result.fold(
       (failure) => emit(InfoError(message: failure.message)),
-      (success) => emit(InfoSuccess(success: success)),
+      (success) => emit(InfoSuccess(calories: success)),
     );
   }
 }

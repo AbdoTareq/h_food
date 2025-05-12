@@ -1,34 +1,26 @@
-import 'package:elm_task/core/error/exceptions.dart';
 import 'package:elm_task/core/network/network_info.dart';
 import 'package:elm_task/export.dart';
-import 'package:elm_task/features/info/data/datasources/auth_local_data_source.dart';
-import 'package:elm_task/features/info/domain/entities/verify.dart';
 
 import '../../domain/repositories/auth_repo.dart';
 
-class AuthRepoImp implements AuthRepo {
-  final AuthRemoteDataSource remoteDataSource;
-  final AuthLocalDataSource localDataSource;
+class InfoRepoImp implements InfoRepo {
+  final InfoRemoteDataSource remoteDataSource;
   final NetworkInfo networkInfo;
 
-  AuthRepoImp({
+  InfoRepoImp({
     required this.remoteDataSource,
-    required this.localDataSource,
     required this.networkInfo,
   });
 
   @override
-  Future<Either<Failure, bool>> login(String email) async {
-    if (await networkInfo.isConnected) {
-      try {
-        final res = await remoteDataSource.login(email);
-        return Right(res);
-      } on ServerException {
-        return Left(ServerFailure(message: 'server failure', data: null));
-      }
-    } else {
-      return const Left(
-          OfflineFailure(message: 'please connect to internet', data: null));
+  Future<Either<Failure, num>> calculateCalories(
+      num weight, num height, num age, String gender) async {
+    try {
+      final res =
+          await remoteDataSource.calculateCalories(weight, height, age, gender);
+      return Right(res);
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString(), data: null));
     }
   }
 }

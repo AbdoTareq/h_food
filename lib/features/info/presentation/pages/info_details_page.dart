@@ -86,15 +86,8 @@ class _InfoDetailsPageState extends State<InfoDetailsPage> {
                         showFailSnack(message: state.message);
                       }
                       if (state is InfoSuccess) {
-                        if (state.success) {
-                          showSuccessSnack(message: context.t.success);
-                          // context.pushNamed(
-                          //   Routes.verify,
-                          //   extra: weightTextController.text,
-                          // );
-                        } else {
-                          showFailSnack(message: context.t.failed);
-                        }
+                        Logger().i(state.calories);
+                        context.pushNamed(Routes.cart, extra: state.calories);
                       }
                     },
                     builder: (context, state) {

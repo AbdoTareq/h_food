@@ -17,10 +17,9 @@ import 'package:elm_task/features/incidents/domain/usecases/create_incident_usec
 import 'package:elm_task/features/incidents/domain/usecases/get_all_incidents_usecase.dart';
 import 'package:elm_task/features/incidents/domain/usecases/incs_status_usecase.dart';
 import 'package:elm_task/features/incidents/presentation/bloc/incidents_bloc.dart';
-import 'package:elm_task/features/info/data/datasources/auth_local_data_source.dart';
 import 'package:elm_task/features/info/data/repositories/repo_imp.dart';
 import 'package:elm_task/features/info/domain/repositories/auth_repo.dart';
-import 'package:elm_task/features/info/domain/usecases/login_usecase.dart';
+import 'package:elm_task/features/info/domain/usecases/save_info_usecase.dart';
 import 'package:elm_task/features/info/presentation/bloc/info_details_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -55,9 +54,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetBusTracksUsecase(sl()));
 
   // Repository
-  sl.registerLazySingleton<AuthRepo>(() => AuthRepoImp(
+  sl.registerLazySingleton<InfoRepo>(() => InfoRepoImp(
         remoteDataSource: sl(),
-        localDataSource: sl(),
         networkInfo: sl(),
       ));
 
@@ -73,10 +71,8 @@ Future<void> init() async {
       ));
 
   // Datasources
-  sl.registerLazySingleton<AuthRemoteDataSource>(
+  sl.registerLazySingleton<InfoRemoteDataSource>(
       () => AuthRemoteDataSourceImp(network: sl()));
-  sl.registerLazySingleton<AuthLocalDataSource>(
-      () => AuthLocalDataSourceImp(localDataSource: sl()));
 
   sl.registerLazySingleton<IncidentsRemoteDataSource>(
       () => IncidentsRemoteDataSourceImp(network: sl()));
