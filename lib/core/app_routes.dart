@@ -5,5 +5,5 @@ abstract class Routes {
   static const cart = '/cart';
   static const incidents = '/incidents';
   static const dashboard = '/dashboard';
-  static const busTracks = '/busTracks';
+  static const createOrder = '/createOrder';
 }

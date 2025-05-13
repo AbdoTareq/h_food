@@ -1,13 +1,13 @@
 import 'package:elm_task/export.dart';
-import 'package:elm_task/features/bus_track/domain/entities/bus_track.dart';
-import 'package:elm_task/features/bus_track/presentation/bloc/bus_tracks_bloc.dart';
-import 'package:elm_task/features/bus_track/presentation/bloc/bus_tracks_event.dart';
-import 'package:elm_task/features/bus_track/presentation/bloc/bus_tracks_state.dart';
+import 'package:elm_task/features/order/domain/entities/bus_track.dart';
+import 'package:elm_task/features/order/presentation/bloc/bus_tracks_bloc.dart';
+import 'package:elm_task/features/order/presentation/bloc/bus_tracks_event.dart';
+import 'package:elm_task/features/order/presentation/bloc/bus_tracks_state.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class BusTracksPage extends StatefulWidget {
-  const BusTracksPage({super.key, required this.id});
-  final String id;
+  const BusTracksPage({super.key, required this.totalCal});
+  final num totalCal;
   @override
   State<BusTracksPage> createState() => _BusTracksPageState();
 }

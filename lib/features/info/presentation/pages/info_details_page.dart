@@ -87,7 +87,8 @@ class _InfoDetailsPageState extends State<InfoDetailsPage> {
                       }
                       if (state is InfoSuccess) {
                         Logger().i(state.calories);
-                        context.pushNamed(Routes.cart, extra: state.calories);
+                        context.pushNamed(Routes.createOrder,
+                            extra: state.calories);
                       }
                     },
                     builder: (context, state) {

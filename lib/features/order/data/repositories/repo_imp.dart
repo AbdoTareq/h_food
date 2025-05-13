@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:elm_task/core/error/exceptions.dart';
 import 'package:elm_task/core/error/failures.dart';
 import 'package:elm_task/core/network/network_info.dart';
-import 'package:elm_task/features/bus_track/data/datasources/bus_tracks_remote_data_source.dart';
-import 'package:elm_task/features/bus_track/domain/entities/bus_track.dart';
-import 'package:elm_task/features/bus_track/domain/repositories/bus_tracks_repo.dart';
+import 'package:elm_task/features/order/data/datasources/bus_tracks_remote_data_source.dart';
+import 'package:elm_task/features/order/domain/entities/bus_track.dart';
+import 'package:elm_task/features/order/domain/repositories/bus_tracks_repo.dart';
 
 class BusTracksRepoImp implements BusTracksRepo {
   final BusTracksRemoteDataSource remoteDataSource;

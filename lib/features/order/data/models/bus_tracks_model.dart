@@ -1,4 +1,4 @@
-import 'package:elm_task/features/bus_track/domain/entities/bus_track.dart';
+import 'package:elm_task/features/order/domain/entities/bus_track.dart';
 
 class BusTracksModel extends BusTracks {
   BusTracksModel({required super.tracks});

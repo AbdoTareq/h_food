@@ -1,7 +1,7 @@
 import 'package:elm_task/core/error/exceptions.dart';
 import 'package:elm_task/core/network/endpoints.dart';
 import 'package:elm_task/core/network/network.dart';
-import 'package:elm_task/features/bus_track/data/models/bus_tracks_model.dart';
+import 'package:elm_task/features/order/data/models/bus_tracks_model.dart';
 
 abstract class BusTracksRemoteDataSource {
   Future<BusTracksModel> getAll();
