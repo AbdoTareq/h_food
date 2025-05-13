@@ -60,7 +60,7 @@ class _InfoDetailsPageState extends State<InfoDetailsPage> {
                     suffixIcon: Text(context.t.kg,
                         style: Theme.of(context).textTheme.labelLarge),
                     validate: (value) =>
-                        value!.length > 2 ? null : context.t.required,
+                        value!.length > 1 ? null : context.t.required,
                   ),
                   TextInput(
                     controller: heightTextController,
@@ -78,7 +78,7 @@ class _InfoDetailsPageState extends State<InfoDetailsPage> {
                     hint: context.t.enterYourAge,
                     inputType: TextInputType.number,
                     validate: (value) =>
-                        value!.length > 2 ? null : context.t.required,
+                        value!.length > 1 ? null : context.t.required,
                   ),
                   BlocConsumer<InfoDetailsBloc, InfoState>(
                     listener: (context, state) {

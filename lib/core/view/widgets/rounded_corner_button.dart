@@ -37,14 +37,16 @@ class RoundedCornerButton extends StatelessWidget {
                   style: isOutlined
                       ? ButtonStyle(
                           elevation: const WidgetStatePropertyAll<double>(0),
-                          backgroundColor: const WidgetStatePropertyAll<Color>(
-                              Colors.transparent),
+                          backgroundColor:
+                              const WidgetStatePropertyAll<Color>(kDEDEDEColor),
                           shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
-                            side: const BorderSide(color: kPrimaryColor),
                           )))
                       : ButtonStyle(
+                          padding: const WidgetStatePropertyAll<EdgeInsets>(
+                            EdgeInsets.all(0),
+                          ),
                           backgroundColor: WidgetStatePropertyAll<Color>(
                               color ?? kPrimaryColor),
                           shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
@@ -57,7 +59,7 @@ class RoundedCornerButton extends StatelessWidget {
                   child: Text(
                     text.toTitleCase(),
                     style: context.textTheme.titleMedium?.copyWith(
-                      color: isOutlined ? null : kWhite,
+                      color: isOutlined ? kGreyShade : kWhite,
                     ),
                   )),
             ),

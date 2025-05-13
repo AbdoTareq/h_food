@@ -1,8 +1,6 @@
 import 'package:elm_task/core/view/animated_splash_page.dart';
-import 'package:elm_task/features/incidents/presentation/pages/dashboard_page.dart';
-import 'package:elm_task/features/incidents/presentation/pages/incidents_page.dart';
 import 'package:elm_task/features/info/presentation/pages/info_details_page.dart';
-import 'package:elm_task/features/order/presentation/screens/create_order_page.dart';
+import 'package:elm_task/features/products/presentation/screens/create_order_page.dart';
 
 import '../../export.dart';
 
@@ -31,19 +29,9 @@ class AppRouter {
           builder: (context, state) => const InfoDetailsPage(),
         ),
         GoRoute(
-          name: Routes.incidents,
-          path: Routes.incidents,
-          builder: (context, state) => const IncidentsPage(),
-        ),
-        GoRoute(
-          name: Routes.dashboard,
-          path: Routes.dashboard,
-          builder: (context, state) => const DashboardPage(),
-        ),
-        GoRoute(
             name: Routes.createOrder,
             path: Routes.createOrder,
-            builder: (context, state) => BusTracksPage(
+            builder: (context, state) => CreateOrderPage(
                   totalCal: state.extra as num,
                 )),
       ]);

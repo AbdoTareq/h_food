@@ -3,24 +3,15 @@ import 'package:elm_task/core/datasources/secure_local_data_source.dart';
 import 'package:elm_task/core/network/network.dart';
 import 'package:elm_task/core/network/network_info.dart';
 import 'package:elm_task/export.dart';
-import 'package:elm_task/features/order/data/datasources/bus_tracks_remote_data_source.dart';
-import 'package:elm_task/features/order/data/repositories/repo_imp.dart';
-import 'package:elm_task/features/order/domain/repositories/bus_tracks_repo.dart';
-import 'package:elm_task/features/order/domain/usecases/get_all_incidents_usecase.dart';
-import 'package:elm_task/features/order/presentation/bloc/bus_tracks_bloc.dart';
-import 'package:elm_task/features/incidents/data/datasources/incidents_local_data_source.dart';
-import 'package:elm_task/features/incidents/data/datasources/incidents_remote_data_source.dart';
-import 'package:elm_task/features/incidents/data/repositories/repo_imp.dart';
-import 'package:elm_task/features/incidents/domain/repositories/incidents_repo.dart';
-import 'package:elm_task/features/incidents/domain/usecases/change_status_incident_usecase.dart';
-import 'package:elm_task/features/incidents/domain/usecases/create_incident_usecase.dart';
-import 'package:elm_task/features/incidents/domain/usecases/get_all_incidents_usecase.dart';
-import 'package:elm_task/features/incidents/domain/usecases/incs_status_usecase.dart';
-import 'package:elm_task/features/incidents/presentation/bloc/incidents_bloc.dart';
 import 'package:elm_task/features/info/data/repositories/repo_imp.dart';
 import 'package:elm_task/features/info/domain/repositories/auth_repo.dart';
 import 'package:elm_task/features/info/domain/usecases/save_info_usecase.dart';
 import 'package:elm_task/features/info/presentation/bloc/info_details_bloc.dart';
+import 'package:elm_task/features/products/data/datasources/products_remote_data_source.dart';
+import 'package:elm_task/features/products/data/repositories/repo_imp.dart';
+import 'package:elm_task/features/products/domain/repositories/products_repo.dart';
+import 'package:elm_task/features/products/domain/usecases/get_all_incidents_usecase.dart';
+import 'package:elm_task/features/products/presentation/bloc/products_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -35,23 +26,11 @@ Future<void> init() async {
     () => InfoDetailsBloc(infoUseCase: sl()),
   );
   sl.registerFactory(
-    () => IncidentsBloc(
-      getAllIncidentsUsecase: sl(),
-      createIncidentUsecase: sl(),
-      changeStatusIncidentUsecase: sl(),
-      getIncsStatusUsecase: sl(),
-    ),
-  );
-  sl.registerFactory(
-    () => BusTracksBloc(getAllBusTracksUsecase: sl()),
+    () => ProductsBloc(getAllProductsUsecase: sl()),
   );
   // Usecases
   sl.registerLazySingleton(() => SaveInfoUsecase(sl()));
-  sl.registerLazySingleton(() => GetAllIncidentsUsecase(sl()));
-  sl.registerLazySingleton(() => CreateIncidentUsecase(sl()));
-  sl.registerLazySingleton(() => ChangeStatusIncidentUsecase(sl()));
-  sl.registerLazySingleton(() => GetIncsStatusUsecase(sl()));
-  sl.registerLazySingleton(() => GetBusTracksUsecase(sl()));
+  sl.registerLazySingleton(() => GetProductsUsecase(sl()));
 
   // Repository
   sl.registerLazySingleton<InfoRepo>(() => InfoRepoImp(
@@ -59,13 +38,7 @@ Future<void> init() async {
         networkInfo: sl(),
       ));
 
-  sl.registerLazySingleton<IncidentsRepo>(() => IncidentsRepoImp(
-        remoteDataSource: sl(),
-        localDataSource: sl(),
-        networkInfo: sl(),
-      ));
-
-  sl.registerLazySingleton<BusTracksRepo>(() => BusTracksRepoImp(
+  sl.registerLazySingleton<ProductsRepo>(() => ProductsRepoImp(
         remoteDataSource: sl(),
         networkInfo: sl(),
       ));
@@ -74,13 +47,8 @@ Future<void> init() async {
   sl.registerLazySingleton<InfoRemoteDataSource>(
       () => AuthRemoteDataSourceImp(network: sl()));
 
-  sl.registerLazySingleton<IncidentsRemoteDataSource>(
-      () => IncidentsRemoteDataSourceImp(network: sl()));
-  sl.registerLazySingleton<IncidentsLocalDataSource>(
-      () => IncidentsLocalDataSourceImp(localDataSource: sl()));
-
-  sl.registerLazySingleton<BusTracksRemoteDataSource>(
-      () => BusTracksRemoteDataSourceImp(network: sl()));
+  sl.registerLazySingleton<ProductsRemoteDataSource>(
+      () => ProductsRemoteDataSourceImp(network: sl()));
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(
