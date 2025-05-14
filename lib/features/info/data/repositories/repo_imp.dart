@@ -1,7 +1,7 @@
 import 'package:h_food/core/network/network_info.dart';
 import 'package:h_food/export.dart';
 
-import '../../domain/repositories/auth_repo.dart';
+import '../../domain/repositories/info_repo.dart';
 
 class InfoRepoImp implements InfoRepo {
   final InfoRemoteDataSource remoteDataSource;

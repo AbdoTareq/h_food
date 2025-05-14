@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:h_food/features/info/domain/repositories/auth_repo.dart';
+import 'package:h_food/features/info/domain/repositories/info_repo.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/error/failures.dart';

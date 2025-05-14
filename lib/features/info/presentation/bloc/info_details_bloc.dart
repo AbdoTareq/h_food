@@ -1,5 +1,5 @@
 import 'package:h_food/export.dart';
-import 'package:h_food/features/info/domain/usecases/save_info_usecase.dart';
+import 'package:h_food/features/info/domain/usecases/info_usecase.dart';
 import 'package:h_food/features/info/presentation/bloc/info_details_event.dart';
 import 'package:h_food/features/info/presentation/bloc/info_details_state.dart';
 

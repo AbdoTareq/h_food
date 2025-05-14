@@ -70,3 +70,4 @@
 
 # FVM Version Cache
 .fvm/
+/android/app/.cxx

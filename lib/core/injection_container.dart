@@ -3,8 +3,8 @@ import 'package:h_food/core/network/network.dart';
 import 'package:h_food/core/network/network_info.dart';
 import 'package:h_food/export.dart';
 import 'package:h_food/features/info/data/repositories/repo_imp.dart';
-import 'package:h_food/features/info/domain/repositories/auth_repo.dart';
-import 'package:h_food/features/info/domain/usecases/save_info_usecase.dart';
+import 'package:h_food/features/info/domain/repositories/info_repo.dart';
+import 'package:h_food/features/info/domain/usecases/info_usecase.dart';
 import 'package:h_food/features/info/presentation/bloc/info_details_bloc.dart';
 import 'package:h_food/features/products/data/datasources/products_remote_data_source.dart';
 import 'package:h_food/features/products/data/repositories/repo_imp.dart';
@@ -43,7 +43,7 @@ Future<void> init() async {
 
   // Datasources
   sl.registerLazySingleton<InfoRemoteDataSource>(
-      () => AuthRemoteDataSourceImp(network: sl()));
+      () => AuthRemoteDataSourceImp());
 
   sl.registerLazySingleton<ProductsRemoteDataSource>(
       () => ProductsRemoteDataSourceImp(network: sl()));
