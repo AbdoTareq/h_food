@@ -2,7 +2,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import 'package:elm_task/features/products/domain/entities/products.dart';
+import 'package:h_food/features/products/domain/entities/products.dart';
 
 @immutable
 abstract class ProductsState extends Equatable {

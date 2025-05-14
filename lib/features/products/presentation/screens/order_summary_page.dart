@@ -1,8 +1,9 @@
-import 'package:elm_task/export.dart';
-import 'package:elm_task/features/products/presentation/bloc/products_bloc.dart';
-import 'package:elm_task/features/products/presentation/bloc/products_event.dart';
-import 'package:elm_task/features/products/presentation/bloc/products_state.dart';
-import 'package:elm_task/features/products/presentation/screens/product_card.dart';
+import 'package:h_food/export.dart';
+import 'package:h_food/features/products/domain/entities/products.dart';
+import 'package:h_food/features/products/presentation/bloc/products_bloc.dart';
+import 'package:h_food/features/products/presentation/bloc/products_event.dart';
+import 'package:h_food/features/products/presentation/bloc/products_state.dart';
+import 'package:h_food/features/products/presentation/screens/product_card.dart';
 
 class OrderSummaryPage extends StatefulWidget {
   const OrderSummaryPage({super.key, required this.totalCal});
@@ -25,7 +26,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
           bloc: productsBloc,
           buildWhen: (previous, current) => current is ProductsSuccess,
           listener: (context, state) {
-            var cart = [];
+            var cart = <Product>[];
             if (state is ProductsSuccess) {
               cart = state.cartList;
               num cal = 0;

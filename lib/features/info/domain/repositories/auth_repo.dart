@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:elm_task/core/error/failures.dart';
+import 'package:h_food/core/error/failures.dart';
 
 abstract class InfoRepo {
   Future<Either<Failure, num>> calculateCalories(

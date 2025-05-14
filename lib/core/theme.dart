@@ -1,5 +1,5 @@
-import 'package:elm_task/core/text_theme.dart';
-import 'package:elm_task/export.dart';
+import 'package:h_food/core/text_theme.dart';
+import 'package:h_food/export.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final lightTheme = ThemeData(

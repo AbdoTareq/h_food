@@ -1,5 +1,5 @@
-import 'package:elm_task/core/network/network_info.dart';
-import 'package:elm_task/export.dart';
+import 'package:h_food/core/network/network_info.dart';
+import 'package:h_food/export.dart';
 
 import '../../domain/repositories/auth_repo.dart';
 

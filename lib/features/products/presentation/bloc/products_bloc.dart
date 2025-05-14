@@ -1,8 +1,8 @@
-import 'package:elm_task/export.dart';
-import 'package:elm_task/features/products/domain/entities/products.dart';
-import 'package:elm_task/features/products/domain/usecases/products_usecase.dart';
-import 'package:elm_task/features/products/presentation/bloc/products_event.dart';
-import 'package:elm_task/features/products/presentation/bloc/products_state.dart';
+import 'package:h_food/export.dart';
+import 'package:h_food/features/products/domain/entities/products.dart';
+import 'package:h_food/features/products/domain/usecases/products_usecase.dart';
+import 'package:h_food/features/products/presentation/bloc/products_event.dart';
+import 'package:h_food/features/products/presentation/bloc/products_state.dart';
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final ProductsUsecase productsUsecase;

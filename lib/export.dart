@@ -13,13 +13,13 @@ export 'features/info/data/datasources/info_remote_data_source.dart';
 // utils
 export 'core/utils/utils.dart';
 export 'core/constants.dart';
-export 'package:elm_task/core/extensions/string_extension.dart';
-export 'package:elm_task/core/extensions/num_extension.dart';
-export 'package:elm_task/core/extensions/context_extension.dart';
-export 'package:elm_task/core/extensions/widget_extension.dart';
+export 'package:h_food/core/extensions/string_extension.dart';
+export 'package:h_food/core/extensions/num_extension.dart';
+export 'package:h_food/core/extensions/context_extension.dart';
+export 'package:h_food/core/extensions/widget_extension.dart';
 
 // most used packages
-export 'package:elm_task/core/app_router.dart';
+export 'package:h_food/core/app_router.dart';
 
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:get_storage/get_storage.dart';
@@ -34,7 +34,7 @@ export 'core/error/failures.dart';
 
 // translations
 export 'core/app_routes.dart';
-export 'package:elm_task/i18n/strings.g.dart';
+export 'package:h_food/i18n/strings.g.dart';
 // routes
 export 'core/injection_container.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';

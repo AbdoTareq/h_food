@@ -1,4 +1,4 @@
-import 'package:elm_task/core/view/widgets/custom_error_widget.dart';
+import 'package:h_food/core/view/widgets/custom_error_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:requests_inspector/requests_inspector.dart';
 

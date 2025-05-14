@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:elm_task/core/error/exceptions.dart';
-import 'package:elm_task/core/network/endpoints.dart';
+import 'package:h_food/core/error/exceptions.dart';
+import 'package:h_food/core/network/endpoints.dart';
 
 import '../../export.dart';
 

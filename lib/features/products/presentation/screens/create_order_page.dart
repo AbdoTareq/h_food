@@ -1,10 +1,10 @@
-import 'package:elm_task/core/view/widgets/valid_button.dart';
-import 'package:elm_task/export.dart';
-import 'package:elm_task/features/products/domain/entities/products.dart';
-import 'package:elm_task/features/products/presentation/bloc/products_bloc.dart';
-import 'package:elm_task/features/products/presentation/bloc/products_event.dart';
-import 'package:elm_task/features/products/presentation/bloc/products_state.dart';
-import 'package:elm_task/features/products/presentation/screens/product_card.dart';
+import 'package:h_food/core/view/widgets/valid_button.dart';
+import 'package:h_food/export.dart';
+import 'package:h_food/features/products/domain/entities/products.dart';
+import 'package:h_food/features/products/presentation/bloc/products_bloc.dart';
+import 'package:h_food/features/products/presentation/bloc/products_event.dart';
+import 'package:h_food/features/products/presentation/bloc/products_state.dart';
+import 'package:h_food/features/products/presentation/screens/product_card.dart';
 
 class CreateOrderPage extends StatefulWidget {
   const CreateOrderPage({super.key, required this.totalCal});

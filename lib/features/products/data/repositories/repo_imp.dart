@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:elm_task/core/error/exceptions.dart';
-import 'package:elm_task/core/error/failures.dart';
-import 'package:elm_task/core/network/network_info.dart';
-import 'package:elm_task/features/products/data/datasources/products_remote_data_source.dart';
-import 'package:elm_task/features/products/domain/entities/products.dart';
-import 'package:elm_task/features/products/domain/repositories/products_repo.dart';
+import 'package:h_food/core/error/exceptions.dart';
+import 'package:h_food/core/error/failures.dart';
+import 'package:h_food/core/network/network_info.dart';
+import 'package:h_food/features/products/data/datasources/products_remote_data_source.dart';
+import 'package:h_food/features/products/domain/entities/products.dart';
+import 'package:h_food/features/products/domain/repositories/products_repo.dart';
 
 class ProductsRepoImp implements ProductsRepo {
   final ProductsRemoteDataSource remoteDataSource;

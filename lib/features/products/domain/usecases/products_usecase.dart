@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:elm_task/features/products/domain/entities/products.dart';
-import 'package:elm_task/features/products/domain/repositories/products_repo.dart';
+import 'package:h_food/features/products/domain/entities/products.dart';
+import 'package:h_food/features/products/domain/repositories/products_repo.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';

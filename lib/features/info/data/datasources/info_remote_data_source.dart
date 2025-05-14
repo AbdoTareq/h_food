@@ -1,4 +1,4 @@
-import 'package:elm_task/core/network/network.dart';
+import 'package:h_food/core/network/network.dart';
 
 abstract class InfoRemoteDataSource {
   Future<num> calculateCalories(num weight, num height, num age, String gender);

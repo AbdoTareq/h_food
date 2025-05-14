@@ -1,4 +1,4 @@
-import 'package:elm_task/features/products/domain/entities/products.dart';
+import 'package:h_food/features/products/domain/entities/products.dart';
 
 class ProductsWrapper extends Products {
   List<ProductModel>? data;

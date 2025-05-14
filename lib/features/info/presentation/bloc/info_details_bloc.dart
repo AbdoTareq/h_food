@@ -1,7 +1,7 @@
-import 'package:elm_task/export.dart';
-import 'package:elm_task/features/info/domain/usecases/save_info_usecase.dart';
-import 'package:elm_task/features/info/presentation/bloc/info_details_event.dart';
-import 'package:elm_task/features/info/presentation/bloc/info_details_state.dart';
+import 'package:h_food/export.dart';
+import 'package:h_food/features/info/domain/usecases/save_info_usecase.dart';
+import 'package:h_food/features/info/presentation/bloc/info_details_event.dart';
+import 'package:h_food/features/info/presentation/bloc/info_details_state.dart';
 
 class InfoDetailsBloc extends Bloc<InfoEvent, InfoState> {
   final SaveInfoUsecase infoUseCase;

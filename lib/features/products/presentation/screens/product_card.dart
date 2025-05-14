@@ -1,9 +1,9 @@
-import 'package:elm_task/core/view/widgets/my_list_tile.dart';
-import 'package:elm_task/core/view/widgets/old_fade_image.dart';
-import 'package:elm_task/export.dart';
-import 'package:elm_task/features/products/domain/entities/products.dart';
-import 'package:elm_task/features/products/presentation/bloc/products_bloc.dart';
-import 'package:elm_task/features/products/presentation/bloc/products_event.dart';
+import 'package:h_food/core/view/widgets/my_list_tile.dart';
+import 'package:h_food/core/view/widgets/old_fade_image.dart';
+import 'package:h_food/export.dart';
+import 'package:h_food/features/products/domain/entities/products.dart';
+import 'package:h_food/features/products/presentation/bloc/products_bloc.dart';
+import 'package:h_food/features/products/presentation/bloc/products_event.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product});
