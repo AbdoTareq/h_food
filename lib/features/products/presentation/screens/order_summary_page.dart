@@ -13,15 +13,31 @@ class OrderSummaryPage extends StatefulWidget {
 
 class _OrderSummaryPageState extends State<OrderSummaryPage> {
   ProductsBloc productsBloc = sl<ProductsBloc>();
+  num cartPrice = 0;
+  num cartCal = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: context.t.orderSummary),
       body: SafeArea(
-        child: BlocBuilder<ProductsBloc, ProductsState>(
+        child: BlocConsumer<ProductsBloc, ProductsState>(
           bloc: productsBloc,
           buildWhen: (previous, current) => current is ProductsSuccess,
+          listener: (context, state) {
+            var cart = [];
+            if (state is ProductsSuccess) {
+              cart = state.cartList;
+              num cal = 0;
+              num price = 0;
+              for (var element in cart) {
+                cal += element.calories * element.quantity;
+                price += element.price * element.quantity;
+              }
+              cartCal = cal;
+              cartPrice = price;
+            }
+          },
           builder: (context, state) {
             if (state is ProductsLoading) {
               return Center(child: const CircularProgressIndicator());
@@ -38,7 +54,8 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                   return 10.heightBox;
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  return ProductCard(product: productsBloc.cartList[index]);
+                  return OrderProductCard(
+                      product: productsBloc.cartList[index]);
                 },
               ),
             );
@@ -54,26 +71,6 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
           }
         },
         builder: (context, state) {
-          var cart = [];
-          if (state is ProductsSuccess) {
-            cart = state.cartList;
-          }
-          getCartPrice() {
-            num price = 0;
-            for (var element in cart) {
-              price += element.price * element.quantity;
-            }
-            return price;
-          }
-
-          getCartCal() {
-            num cal = 0;
-            for (var element in cart) {
-              cal += element.calories * element.quantity;
-            }
-            return cal;
-          }
-
           return SafeArea(
             child: Container(
               padding: const EdgeInsets.all(16),
@@ -86,7 +83,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                     children: [
                       Text(context.t.cal),
                       Text(
-                        ' ${getCartCal()} ${context.t.cal} ${context.t.outOf} ${widget.totalCal} ${context.t.cal}',
+                        ' $cartCal ${context.t.cal} ${context.t.outOf} ${widget.totalCal} ${context.t.cal}',
                         style: context.textTheme.bodySmall,
                       ),
                     ],
@@ -97,7 +94,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                     children: [
                       Text(context.t.price.toTitleCase()),
                       Text(
-                        '\$ ${getCartPrice()}',
+                        '\$ $cartPrice',
                         style: context.textTheme.bodySmall,
                       ),
                     ],

@@ -1,3 +1,4 @@
+import 'package:elm_task/core/view/widgets/my_list_tile.dart';
 import 'package:elm_task/core/view/widgets/old_fade_image.dart';
 import 'package:elm_task/export.dart';
 import 'package:elm_task/features/products/domain/entities/products.dart';
@@ -53,6 +54,54 @@ class ProductCard extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class OrderProductCard extends StatelessWidget {
+  const OrderProductCard({super.key, required this.product});
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 1,
+      color: kWhite,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: MyListTile(
+          leading: SizedBox(
+            width: .3.sw,
+            height: 90,
+            child: FadeImage(imagePath: product.imageUrl),
+          ),
+          children: [
+            8.heightBox,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [Text(product.foodName), Text('\$12')],
+            ),
+            10.heightBox,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${product.calories} ${context.t.cal}',
+                  style: context.textTheme.bodySmall,
+                ),
+                RoundedCornerButton(
+                  width: 70,
+                  height: 32,
+                  onPressed: () {
+                    sl<ProductsBloc>().add(AddToCart(product));
+                  },
+                  text: context.t.add,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
