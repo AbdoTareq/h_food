@@ -26,7 +26,7 @@ Future<void> init() async {
     () => InfoDetailsBloc(infoUseCase: sl()),
   );
   sl.registerLazySingleton(
-    () => ProductsBloc(getAllProductsUsecase: sl()),
+    () => ProductsBloc(productsUsecase: sl()),
   );
   // Usecases
   sl.registerLazySingleton(() => SaveInfoUsecase(sl()));

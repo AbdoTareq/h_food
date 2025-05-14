@@ -26,4 +26,9 @@ class ProductsUsecase implements UseCase<Products, NoParams> {
   Future<Either<Failure, Products>> getAllVegetables() async {
     return await repository.getAllVegetables();
   }
+
+  Future<Either<Failure, Map<String, dynamic>>> makeOrder(
+      Map<String, dynamic> data) async {
+    return await repository.makeOrder(data);
+  }
 }

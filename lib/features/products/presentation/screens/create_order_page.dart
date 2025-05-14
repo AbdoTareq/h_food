@@ -1,4 +1,3 @@
-import 'package:elm_task/core/view/widgets/old_fade_image.dart';
 import 'package:elm_task/core/view/widgets/valid_button.dart';
 import 'package:elm_task/export.dart';
 import 'package:elm_task/features/products/domain/entities/products.dart';
@@ -16,7 +15,7 @@ class CreateOrderPage extends StatefulWidget {
 
 class _CreateOrderPageState extends State<CreateOrderPage> {
   late ProductsBloc productsBloc;
-  final isCartNotEmpty = ValueNotifier(false);
+  final isMealComplete = ValueNotifier(false);
   num cartPrice = 0;
   num cartCal = 0;
 
@@ -31,146 +30,79 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => productsBloc,
-      child: Scaffold(
-        appBar: CustomAppBar(title: context.t.createOrder),
-        body: SafeArea(
-          child: BlocBuilder<ProductsBloc, ProductsState>(
-            builder: (context, state) {
-              if (state is ProductsLoading) {
-                return Center(child: const CircularProgressIndicator());
-              }
-              if (state is ProductsError) {
-                return Text(state.message);
-              }
-              if (state is ProductsSuccess) {}
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        context.t.vegetables,
-                        style: context.textTheme.headlineSmall,
-                      ),
-                      SizedBox(
-                        height: 190,
-                        child: ListView.separated(
-                          separatorBuilder: (context, index) => 8.widthBox,
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          itemCount: productsBloc.vegetablesList.length,
-                          itemBuilder: (context, index) {
-                            return BlocProvider(
-                              create: (context) => productsBloc,
-                              child: ProductCard(
-                                product: productsBloc.vegetablesList[index],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                      20.heightBox,
-                      Text(
-                        context.t.meats,
-                        style: context.textTheme.headlineSmall,
-                      ),
-                      SizedBox(
-                        height: 190,
-                        child: ListView.separated(
-                          separatorBuilder: (context, index) => 8.widthBox,
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          itemCount: productsBloc.meetList.length,
-                          itemBuilder: (context, index) {
-                            return ProductCard(
-                              product: productsBloc.meetList[index],
-                            );
-                          },
-                        ),
-                      ),
-                      20.heightBox,
-                      Text(
-                        context.t.carbs,
-                        style: context.textTheme.headlineSmall,
-                      ),
-                      SizedBox(
-                        height: 190,
-                        child: ListView.separated(
-                          separatorBuilder: (context, index) => 8.widthBox,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: productsBloc.carbsList.length,
-                          itemBuilder: (context, index) {
-                            return ProductCard(
-                              product: productsBloc.carbsList[index],
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-        bottomNavigationBar: BlocConsumer<ProductsBloc, ProductsState>(
-          listener: (context, state) {
-            var cart = <Product>[];
-            if (state is ProductsSuccess) {
-              cart = state.cartList;
-              isCartNotEmpty.value = state.cartList.isNotEmpty;
-              num cal = 0;
-              num price = 0;
-              for (var element in cart) {
-                cal += element.calories * element.quantity;
-                price += element.price * element.quantity;
-              }
-              cartCal = cal;
-              cartPrice = price;
-            }
-          },
+    return Scaffold(
+      appBar: CustomAppBar(title: context.t.createOrder),
+      body: SafeArea(
+        child: BlocBuilder<ProductsBloc, ProductsState>(
+          bloc: productsBloc,
           builder: (context, state) {
-            return SafeArea(
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                color: kWhite,
+            if (state is ProductsLoading) {
+              return Center(child: const CircularProgressIndicator());
+            }
+            if (state is ProductsError) {
+              return Text(state.message);
+            }
+            if (state is ProductsSuccess) {}
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SingleChildScrollView(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(context.t.cal),
-                        Text(
-                          ' $cartCal ${context.t.cal} ${context.t.outOf} ${widget.totalCal} ${context.t.cal}',
-                          style: context.textTheme.bodySmall,
-                        ),
-                      ],
+                    Text(
+                      context.t.vegetables,
+                      style: context.textTheme.headlineSmall,
                     ),
-                    8.heightBox,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(context.t.price.toTitleCase()),
-                        Text(
-                          '\$ $cartPrice',
-                          style: context.textTheme.bodySmall,
-                        ),
-                      ],
+                    SizedBox(
+                      height: 190,
+                      child: ListView.separated(
+                        separatorBuilder: (context, index) => 8.widthBox,
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemCount: productsBloc.vegetablesList.length,
+                        itemBuilder: (context, index) {
+                          return ProductCard(
+                            product: productsBloc.vegetablesList[index],
+                          );
+                        },
+                      ),
                     ),
-                    8.heightBox,
-                    ValidButton(
-                      isValid: isCartNotEmpty,
-                      text: context.t.placeOrder,
-                      onPressed: () {
-                        context.pushNamed(
-                          Routes.orderSummary,
-                          extra: widget.totalCal,
-                        );
-                      },
+                    20.heightBox,
+                    Text(
+                      context.t.meats,
+                      style: context.textTheme.headlineSmall,
+                    ),
+                    SizedBox(
+                      height: 190,
+                      child: ListView.separated(
+                        separatorBuilder: (context, index) => 8.widthBox,
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemCount: productsBloc.meetList.length,
+                        itemBuilder: (context, index) {
+                          return ProductCard(
+                            product: productsBloc.meetList[index],
+                          );
+                        },
+                      ),
+                    ),
+                    20.heightBox,
+                    Text(
+                      context.t.carbs,
+                      style: context.textTheme.headlineSmall,
+                    ),
+                    SizedBox(
+                      height: 190,
+                      child: ListView.separated(
+                        separatorBuilder: (context, index) => 8.widthBox,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: productsBloc.carbsList.length,
+                        itemBuilder: (context, index) {
+                          return ProductCard(
+                            product: productsBloc.carbsList[index],
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -178,6 +110,69 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
             );
           },
         ),
+      ),
+      bottomNavigationBar: BlocConsumer<ProductsBloc, ProductsState>(
+        bloc: productsBloc,
+        listener: (context, state) {
+          var cart = <Product>[];
+          if (state is ProductsSuccess) {
+            cart = state.cartList;
+            num cal = 0;
+            num price = 0;
+            for (var element in cart) {
+              cal += element.calories * element.quantity;
+              price += element.price * element.quantity;
+            }
+            cartCal = cal;
+            cartPrice = price;
+            isMealComplete.value = cartCal >= widget.totalCal;
+          }
+        },
+        builder: (context, state) {
+          return SafeArea(
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              color: kWhite,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(context.t.cal),
+                      Text(
+                        ' $cartCal ${context.t.cal} ${context.t.outOf} ${widget.totalCal.toInt()} ${context.t.cal}',
+                        style: context.textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                  8.heightBox,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(context.t.price.toTitleCase()),
+                      Text(
+                        '\$ $cartPrice',
+                        style: context.textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                  8.heightBox,
+                  ValidButton(
+                    isValid: isMealComplete,
+                    text: context.t.placeOrder,
+                    onPressed: () {
+                      context.pushNamed(
+                        Routes.orderSummary,
+                        extra: widget.totalCal,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

@@ -5,14 +5,14 @@ import 'package:elm_task/features/products/presentation/bloc/products_event.dart
 import 'package:elm_task/features/products/presentation/bloc/products_state.dart';
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
-  final ProductsUsecase getAllProductsUsecase;
+  final ProductsUsecase productsUsecase;
   var meetList = <Product>[];
   var carbsList = <Product>[];
   var vegetablesList = <Product>[];
   var cartList = <Product>[];
 
   ProductsBloc({
-    required this.getAllProductsUsecase,
+    required this.productsUsecase,
   }) : super(ProductsEmpty()) {
     on<GetAllMeetEvent>(_getAllMeet);
     on<GetAllCarbsEvent>(_getAllCarbs);
@@ -23,7 +23,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   Future<void> _getAllMeet(
       GetAllMeetEvent event, Emitter<ProductsState> emit) async {
     emit(ProductsLoading());
-    final result = await getAllProductsUsecase.getAllMeet();
+    final result = await productsUsecase.getAllMeet();
     result.fold(
       (failure) => emit(ProductsError(message: failure.message)),
       (success) {
@@ -36,7 +36,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   Future<void> _getAllCarbs(
       GetAllCarbsEvent event, Emitter<ProductsState> emit) async {
     emit(ProductsLoading());
-    final result = await getAllProductsUsecase.getAllCarbs();
+    final result = await productsUsecase.getAllCarbs();
     result.fold(
       (failure) => emit(ProductsError(message: failure.message)),
       (success) {
@@ -49,7 +49,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   Future<void> _getAllVegetables(
       GetAllVegetablesEvent event, Emitter<ProductsState> emit) async {
     emit(ProductsLoading());
-    final result = await getAllProductsUsecase.getAllVegetables();
+    final result = await productsUsecase.getAllVegetables();
     result.fold(
       (failure) => emit(ProductsError(message: failure.message)),
       (success) {
@@ -73,5 +73,15 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   }
 
   Future<void> _confirmOrder(
-      ConfirmOrderEvent event, Emitter<ProductsState> emit) async {}
+      ConfirmOrderEvent event, Emitter<ProductsState> emit) async {
+    emit(ProductsLoading());
+    final result = await productsUsecase.makeOrder(event.cart);
+    result.fold(
+      (failure) => emit(ProductsError(message: failure.message)),
+      (success) {
+        cartList = [];
+        emit(ProductsSuccess(orderResult: success));
+      },
+    );
+  }
 }

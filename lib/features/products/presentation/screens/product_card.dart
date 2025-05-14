@@ -45,7 +45,7 @@ class ProductCard extends StatelessWidget {
                     width: 70,
                     height: 32,
                     onPressed: () {
-                      context.read<ProductsBloc>().add(AddToCart(product));
+                      sl<ProductsBloc>().add(AddToCart(product));
                     },
                     text: context.t.add,
                   ),

@@ -126,7 +126,7 @@ class ProductsRemoteDataSourceImp implements ProductsRemoteDataSource {
 
   @override
   Future<Map<String, dynamic>> makeOrder(Map<String, dynamic> data) async {
-    final response = await network.get(Endpoints.vegetables, {});
+    final response = await network.post(Endpoints.placeOrder, data);
     if (response.statusCode == 200) {
       return response.data;
     } else {
