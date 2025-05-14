@@ -1,9 +1,9 @@
 class Endpoints {
-  static const String baseUrl = 'https://uz8if7.buildship.run';
+  static const String baseUrl =
+      'https://h-food-e6c37-default-rtdb.firebaseio.com';
 
   static const String placeOrder = '/placeOrder';
-  static const String meet = '/meet';
-  static const String carbs = '/carbs';
-  static const String vegetables = '/vegetables';
-  static const String dashboard = '/dashboard';
+  static const String meat = '/meat.json';
+  static const String carbs = '/carbs.json';
+  static const String vegetables = '/vegetables.json';
 }

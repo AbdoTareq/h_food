@@ -34,16 +34,17 @@ class Network implements NetworkInterface {
     try {
       final response = await requestType();
       if (response.statusCode! > 210 || response.statusCode! < 200) {
-        // Logger().i(response.data);
+        Logger().i(response.data);
         throw response.data;
       }
       // success
       return response;
     } on DioException catch (e) {
-      // Logger().i(e.message);
+      Logger().i(e.response?.data);
+      Logger().i(e);
       throw ServerException(message: e.message);
     } catch (e) {
-      // Logger().i(e);
+      Logger().i(e);
       throw ServerException(message: e.toString());
     }
   }
