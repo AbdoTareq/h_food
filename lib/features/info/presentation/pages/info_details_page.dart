@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:h_food/core/view/widgets/custom_dropdown_field.dart';
+import 'package:h_food/core/view/widgets/valid_button.dart';
 import 'package:h_food/export.dart';
 import 'package:h_food/features/info/presentation/bloc/info_details_bloc.dart';
 import 'package:h_food/features/info/presentation/bloc/info_details_event.dart';
@@ -17,6 +19,7 @@ class _InfoDetailsPageState extends State<InfoDetailsPage> {
   final heightTextController = TextEditingController();
   final ageTextController = TextEditingController();
   final genderTextController = TextEditingController();
+  final isValid = ValueNotifier(false);
 
   @override
   void dispose() {
@@ -77,8 +80,19 @@ class _InfoDetailsPageState extends State<InfoDetailsPage> {
                     title: context.t.age,
                     hint: context.t.enterYourAge,
                     inputType: TextInputType.number,
-                    validate: (value) =>
-                        value!.length > 1 ? null : context.t.required,
+                    validate: (value) {
+                      Future.delayed(Duration(milliseconds: 200)).then((_) =>
+                          isValid.value =
+                              weightTextController.text.isNotEmpty &&
+                                  heightTextController.text.isNotEmpty &&
+                                  ageTextController.text.isNotEmpty &&
+                                  genderTextController.text.isNotEmpty);
+                      if (value!.length > 1) {
+                        return null;
+                      } else {
+                        return context.t.required;
+                      }
+                    },
                   ),
                   BlocConsumer<InfoDetailsBloc, InfoState>(
                     listener: (context, state) {
@@ -92,7 +106,8 @@ class _InfoDetailsPageState extends State<InfoDetailsPage> {
                       }
                     },
                     builder: (context, state) {
-                      return RoundedCornerButton(
+                      return ValidButton(
+                        isValid: isValid,
                         text: context.t.next,
                         isLoading: state is InfoLoading,
                         onPressed: () async {

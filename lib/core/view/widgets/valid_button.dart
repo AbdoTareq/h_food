@@ -6,10 +6,12 @@ class ValidButton extends StatelessWidget {
     required this.isValid,
     required this.text,
     required this.onPressed,
+    this.isLoading = false,
   });
 
   final ValueNotifier<bool> isValid;
   final String text;
+  final bool isLoading;
   final void Function() onPressed;
 
   @override
@@ -18,6 +20,7 @@ class ValidButton extends StatelessWidget {
       valueListenable: isValid,
       builder: (context, value, child) {
         return RoundedCornerButton(
+          isLoading: isLoading,
           isOutlined: !isValid.value,
           onPressed: isValid.value ? onPressed : null,
           text: text,
