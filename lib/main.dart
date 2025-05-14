@@ -1,4 +1,3 @@
-import 'package:h_food/core/view/widgets/custom_error_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:requests_inspector/requests_inspector.dart';
 
@@ -8,7 +7,6 @@ import 'export.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-  await GetStorage.init();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(statusBarColor: kPrimaryColor),
   );

@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:h_food/core/datasources/secure_local_data_source.dart';
 import 'package:h_food/core/network/network.dart';
 import 'package:h_food/core/network/network_info.dart';
 import 'package:h_food/export.dart';
@@ -12,7 +11,6 @@ import 'package:h_food/features/products/data/repositories/repo_imp.dart';
 import 'package:h_food/features/products/domain/repositories/products_repo.dart';
 import 'package:h_food/features/products/domain/usecases/products_usecase.dart';
 import 'package:h_food/features/products/presentation/bloc/products_bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:requests_inspector/requests_inspector.dart';
@@ -53,16 +51,10 @@ Future<void> init() async {
   //! Core
   sl.registerLazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(connectionChecker: sl()));
-  sl.registerLazySingleton<NetworkInterface>(
-      () => Network(dio: sl(), box: sl()));
+  sl.registerLazySingleton<NetworkInterface>(() => Network(dio: sl()));
   sl.registerLazySingleton(() => InternetConnectionChecker.instance);
-  sl.registerLazySingleton(() => SecureLocalDataSourceImpl(box: sl()));
-  sl.registerLazySingleton<LocalDataSource>(
-      () => LocalDataSourceImpl(box: sl()));
 
   //! External
-  sl.registerLazySingleton(() => GetStorage());
-  sl.registerLazySingleton(() => const FlutterSecureStorage());
   sl.registerLazySingleton<Dio>(() => Dio(BaseOptions(
         connectTimeout: const Duration(seconds: 1000),
         receiveTimeout: const Duration(seconds: 1000),

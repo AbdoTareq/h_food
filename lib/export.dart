@@ -8,7 +8,6 @@ export 'core/view/widgets/custom_app_bar.dart';
 // constants
 export 'core/theme.dart';
 export 'core/app_colors.dart';
-export 'core/datasources/local_data_source.dart';
 export 'features/info/data/datasources/info_remote_data_source.dart';
 // utils
 export 'core/utils/utils.dart';
@@ -22,7 +21,6 @@ export 'package:h_food/core/extensions/widget_extension.dart';
 export 'package:h_food/core/app_router.dart';
 
 export 'package:flutter_screenutil/flutter_screenutil.dart';
-export 'package:get_storage/get_storage.dart';
 export 'package:flutter/material.dart' hide TextDirection;
 export 'package:dartz/dartz.dart' hide State, Order;
 export 'package:flutter/services.dart' hide TextInput, TextDirection;

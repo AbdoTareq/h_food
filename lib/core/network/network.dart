@@ -13,10 +13,8 @@ abstract class NetworkInterface {
 
 class Network implements NetworkInterface {
   final Dio dio;
-  final LocalDataSource box;
   Network({
     required this.dio,
-    required this.box,
   });
 
   late Map<String, String?> headers;
@@ -25,12 +23,6 @@ class Network implements NetworkInterface {
     headers = {
       'Content-Type': 'application/json',
     };
-    if (await box.containsKey(kToken)) {
-      headers = {
-        ...headers,
-        'Authorization': 'Bearer ${await box.read(kToken)}',
-      };
-    }
     try {
       final response = await requestType();
       if (response.statusCode! > 210 || response.statusCode! < 200) {
