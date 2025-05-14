@@ -91,13 +91,30 @@ class OrderProductCard extends StatelessWidget {
                   '${product.calories} ${context.t.cal}',
                   style: context.textTheme.bodySmall,
                 ),
-                RoundedCornerButton(
-                  width: 70,
-                  height: 32,
-                  onPressed: () {
-                    sl<ProductsBloc>().add(AddToCart(product));
-                  },
-                  text: context.t.add,
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: product.quantity > 0
+                          ? () =>
+                              sl<ProductsBloc>().add(RemoveFromCart(product))
+                          : null,
+                      child: const Icon(
+                        Icons.remove_circle,
+                        color: kPrimaryColor,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text('${product.quantity}'),
+                    ),
+                    GestureDetector(
+                      child: const Icon(
+                        Icons.add_circle,
+                        color: kPrimaryColor,
+                      ),
+                      onTap: () => sl<ProductsBloc>().add(AddToCart(product)),
+                    ),
+                  ],
                 ),
               ],
             ),

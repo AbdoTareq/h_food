@@ -19,6 +19,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     on<GetAllVegetablesEvent>(_getAllVegetables);
     on<AddToCart>(_addToCart);
     on<ConfirmOrderEvent>(_confirmOrder);
+    on<RemoveFromCart>(_removeFromCart);
   }
   Future<void> _getAllMeet(
       GetAllMeetEvent event, Emitter<ProductsState> emit) async {
@@ -60,14 +61,38 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   }
 
   Future<void> _addToCart(AddToCart event, Emitter<ProductsState> emit) async {
-    if (cartList.contains(event.product)) {
-      var product =
-          event.product.copyWith(quantity: event.product.quantity + 1);
-      cartList.remove(event.product);
-      cartList.add(product);
+    int index =
+        cartList.indexWhere((p) => p.foodName == event.product.foodName);
+    if (index != -1) {
+      // Product already in cart → update quantity
+      final existingProduct = cartList[index];
+      cartList[index] =
+          existingProduct.copyWith(quantity: existingProduct.quantity + 1);
     } else {
       cartList.add(event.product);
     }
+    Logger().i(cartList.length);
+    emit(ProductsSuccess(cartList: []));
+    emit(ProductsSuccess(cartList: cartList));
+  }
+
+  Future<void> _removeFromCart(
+      RemoveFromCart event, Emitter<ProductsState> emit) async {
+    int index =
+        cartList.indexWhere((p) => p.foodName == event.product.foodName);
+    if (index != -1) {
+      final existingProduct = cartList[index];
+      if (existingProduct.quantity > 1) {
+        // Decrease quantity
+        cartList[index] = existingProduct.copyWith(
+          quantity: existingProduct.quantity - 1,
+        );
+      } else {
+        // Remove from cart
+        cartList.removeAt(index);
+      }
+    }
+    Logger().i(cartList.length);
     emit(ProductsSuccess(cartList: []));
     emit(ProductsSuccess(cartList: cartList));
   }

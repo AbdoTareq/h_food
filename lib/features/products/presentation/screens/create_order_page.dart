@@ -29,6 +29,12 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
   }
 
   @override
+  void dispose() {
+    productsBloc.cartList.clear();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: context.t.createOrder),

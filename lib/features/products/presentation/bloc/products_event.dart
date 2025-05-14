@@ -19,6 +19,11 @@ class AddToCart extends ProductsEvent {
   AddToCart(this.product);
 }
 
+class RemoveFromCart extends ProductsEvent {
+  final Product product;
+  RemoveFromCart(this.product);
+}
+
 class ConfirmOrderEvent extends ProductsEvent {
   final Map<String, dynamic> cart;
   ConfirmOrderEvent(this.cart);

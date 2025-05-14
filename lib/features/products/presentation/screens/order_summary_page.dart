@@ -18,6 +18,12 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
   num cartCal = 0;
 
   @override
+  void initState() {
+    getSummary(productsBloc.cartList);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: context.t.orderSummary),
@@ -26,17 +32,8 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
           bloc: productsBloc,
           buildWhen: (previous, current) => current is ProductsSuccess,
           listener: (context, state) {
-            var cart = <Product>[];
             if (state is ProductsSuccess) {
-              cart = state.cartList;
-              num cal = 0;
-              num price = 0;
-              for (var element in cart) {
-                cal += element.calories * element.quantity;
-                price += element.price * element.quantity;
-              }
-              cartCal = cal;
-              cartPrice = price;
+              getSummary(state.cartList);
             }
           },
           builder: (context, state) {
@@ -67,8 +64,10 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
         bloc: productsBloc,
         listener: (context, state) {
           if (state is ProductsSuccess) {
-            Logger().i(state.orderResult);
-            context.pop();
+            if (state.orderResult['result'] != null &&
+                state.orderResult['result']) {
+              context.pop();
+            }
           }
         },
         builder: (context, state) {
@@ -84,7 +83,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                     children: [
                       Text(context.t.cal),
                       Text(
-                        ' $cartCal ${context.t.cal} ${context.t.outOf} ${widget.totalCal} ${context.t.cal}',
+                        ' $cartCal ${context.t.cal} ${context.t.outOf} ${widget.totalCal.toInt()} ${context.t.cal}',
                         style: context.textTheme.bodySmall,
                       ),
                     ],
@@ -127,5 +126,16 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
         },
       ),
     );
+  }
+
+  void getSummary(List<Product> cartList) {
+    num cal = 0;
+    num price = 0;
+    for (var element in cartList) {
+      cal += element.calories * element.quantity;
+      price += element.price * element.quantity;
+    }
+    cartCal = cal;
+    cartPrice = price;
   }
 }
