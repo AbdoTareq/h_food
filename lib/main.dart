@@ -33,12 +33,6 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp.router(
-          builder: (context, child) {
-            ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
-              return CustomErrorWidget(errorDetails: errorDetails);
-            };
-            return child!;
-          },
           locale: TranslationProvider.of(context).flutterLocale,
           theme: lightTheme,
           debugShowCheckedModeBanner: false,

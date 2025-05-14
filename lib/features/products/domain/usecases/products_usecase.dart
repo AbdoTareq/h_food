@@ -5,10 +5,10 @@ import 'package:elm_task/features/products/domain/repositories/products_repo.dar
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
 
-class GetProductsUsecase implements UseCase<Products, NoParams> {
+class ProductsUsecase implements UseCase<Products, NoParams> {
   final ProductsRepo repository;
 
-  GetProductsUsecase(this.repository);
+  ProductsUsecase(this.repository);
 
   @override
   Future<Either<Failure, Products>> call(NoParams params) async {

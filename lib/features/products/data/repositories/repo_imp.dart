@@ -59,4 +59,20 @@ class ProductsRepoImp implements ProductsRepo {
           OfflineFailure(message: 'please connect to internet', data: null));
     }
   }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> makeOrder(
+      Map<String, dynamic> data) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final res = await remoteDataSource.makeOrder(data);
+        return Right(res);
+      } on ServerException {
+        return Left(ServerFailure(message: 'server failure', data: null));
+      }
+    } else {
+      return const Left(
+          OfflineFailure(message: 'please connect to internet', data: null));
+    }
+  }
 }

@@ -10,7 +10,7 @@ import 'package:elm_task/features/info/presentation/bloc/info_details_bloc.dart'
 import 'package:elm_task/features/products/data/datasources/products_remote_data_source.dart';
 import 'package:elm_task/features/products/data/repositories/repo_imp.dart';
 import 'package:elm_task/features/products/domain/repositories/products_repo.dart';
-import 'package:elm_task/features/products/domain/usecases/get_all_incidents_usecase.dart';
+import 'package:elm_task/features/products/domain/usecases/products_usecase.dart';
 import 'package:elm_task/features/products/presentation/bloc/products_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -25,12 +25,12 @@ Future<void> init() async {
   sl.registerFactory(
     () => InfoDetailsBloc(infoUseCase: sl()),
   );
-  sl.registerFactory(
+  sl.registerLazySingleton(
     () => ProductsBloc(getAllProductsUsecase: sl()),
   );
   // Usecases
   sl.registerLazySingleton(() => SaveInfoUsecase(sl()));
-  sl.registerLazySingleton(() => GetProductsUsecase(sl()));
+  sl.registerLazySingleton(() => ProductsUsecase(sl()));
 
   // Repository
   sl.registerLazySingleton<InfoRepo>(() => InfoRepoImp(

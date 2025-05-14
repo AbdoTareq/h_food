@@ -17,6 +17,8 @@ class CreateOrderPage extends StatefulWidget {
 class _CreateOrderPageState extends State<CreateOrderPage> {
   late ProductsBloc productsBloc;
   final isCartNotEmpty = ValueNotifier(false);
+  num cartPrice = 0;
+  num cartCal = 0;
 
   @override
   void initState() {
@@ -34,12 +36,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
       child: Scaffold(
         appBar: CustomAppBar(title: context.t.createOrder),
         body: SafeArea(
-          child: BlocConsumer<ProductsBloc, ProductsState>(
-            listener: (context, state) {
-              if (state is ProductsSuccess) {
-                isCartNotEmpty.value = state.cartList.isNotEmpty;
-              }
-            },
+          child: BlocBuilder<ProductsBloc, ProductsState>(
             builder: (context, state) {
               if (state is ProductsLoading) {
                 return Center(child: const CircularProgressIndicator());
@@ -119,28 +116,23 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
             },
           ),
         ),
-        bottomNavigationBar: BlocBuilder<ProductsBloc, ProductsState>(
-          builder: (context, state) {
-            var cart = [];
+        bottomNavigationBar: BlocConsumer<ProductsBloc, ProductsState>(
+          listener: (context, state) {
+            var cart = <Product>[];
             if (state is ProductsSuccess) {
               cart = state.cartList;
-            }
-            getCartPrice() {
+              isCartNotEmpty.value = state.cartList.isNotEmpty;
+              num cal = 0;
               num price = 0;
               for (var element in cart) {
+                cal += element.calories * element.quantity;
                 price += element.price * element.quantity;
               }
-              return price;
+              cartCal = cal;
+              cartPrice = price;
             }
-
-            getCartCal() {
-              num cal = 0;
-              for (var element in cart) {
-                cal += element.calories * element.quantity;
-              }
-              return cal;
-            }
-
+          },
+          builder: (context, state) {
             return SafeArea(
               child: Container(
                 padding: const EdgeInsets.all(16),
@@ -153,7 +145,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                       children: [
                         Text(context.t.cal),
                         Text(
-                          ' ${getCartCal()} ${context.t.cal} ${context.t.outOf} ${widget.totalCal} ${context.t.cal}',
+                          ' $cartCal ${context.t.cal} ${context.t.outOf} ${widget.totalCal} ${context.t.cal}',
                           style: context.textTheme.bodySmall,
                         ),
                       ],
@@ -164,7 +156,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                       children: [
                         Text(context.t.price.toTitleCase()),
                         Text(
-                          '\$ ${getCartPrice()}',
+                          '\$ $cartPrice',
                           style: context.textTheme.bodySmall,
                         ),
                       ],
@@ -173,7 +165,12 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                     ValidButton(
                       isValid: isCartNotEmpty,
                       text: context.t.placeOrder,
-                      onPressed: () {},
+                      onPressed: () {
+                        context.pushNamed(
+                          Routes.orderSummary,
+                          extra: widget.totalCal,
+                        );
+                      },
                     ),
                   ],
                 ),

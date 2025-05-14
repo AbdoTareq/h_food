@@ -18,3 +18,8 @@ class AddToCart extends ProductsEvent {
   final Product product;
   AddToCart(this.product);
 }
+
+class ConfirmOrderEvent extends ProductsEvent {
+  final Map<String, dynamic> cart;
+  ConfirmOrderEvent(this.cart);
+}

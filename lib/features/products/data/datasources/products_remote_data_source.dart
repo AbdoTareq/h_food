@@ -8,6 +8,7 @@ abstract class ProductsRemoteDataSource {
   Future<ProductsWrapper> getAllMeet();
   Future<ProductsWrapper> getAllCarbs();
   Future<ProductsWrapper> getAllVegetables();
+  Future<Map<String, dynamic>> makeOrder(Map<String, dynamic> data);
 }
 
 class ProductsRemoteDataSourceImp implements ProductsRemoteDataSource {
@@ -121,5 +122,15 @@ class ProductsRemoteDataSourceImp implements ProductsRemoteDataSource {
         }
       ]
     });
+  }
+
+  @override
+  Future<Map<String, dynamic>> makeOrder(Map<String, dynamic> data) async {
+    final response = await network.get(Endpoints.vegetables, {});
+    if (response.statusCode == 200) {
+      return response.data;
+    } else {
+      throw ServerException(message: "Error");
+    }
   }
 }

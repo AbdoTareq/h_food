@@ -1,6 +1,7 @@
 import 'package:elm_task/core/view/animated_splash_page.dart';
 import 'package:elm_task/features/info/presentation/pages/info_details_page.dart';
 import 'package:elm_task/features/products/presentation/screens/create_order_page.dart';
+import 'package:elm_task/features/products/presentation/screens/order_summary_page.dart';
 
 import '../../export.dart';
 
@@ -34,5 +35,12 @@ class AppRouter {
             builder: (context, state) => CreateOrderPage(
                   totalCal: state.extra as num,
                 )),
+        GoRoute(
+          name: Routes.orderSummary,
+          path: Routes.orderSummary,
+          builder: (context, state) => OrderSummaryPage(
+            totalCal: state.extra as num,
+          ),
+        )
       ]);
 }

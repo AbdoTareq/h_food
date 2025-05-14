@@ -1,11 +1,11 @@
 import 'package:elm_task/export.dart';
 import 'package:elm_task/features/products/domain/entities/products.dart';
-import 'package:elm_task/features/products/domain/usecases/get_all_incidents_usecase.dart';
+import 'package:elm_task/features/products/domain/usecases/products_usecase.dart';
 import 'package:elm_task/features/products/presentation/bloc/products_event.dart';
 import 'package:elm_task/features/products/presentation/bloc/products_state.dart';
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
-  final GetProductsUsecase getAllProductsUsecase;
+  final ProductsUsecase getAllProductsUsecase;
   var meetList = <Product>[];
   var carbsList = <Product>[];
   var vegetablesList = <Product>[];
@@ -18,6 +18,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     on<GetAllCarbsEvent>(_getAllCarbs);
     on<GetAllVegetablesEvent>(_getAllVegetables);
     on<AddToCart>(_addToCart);
+    on<ConfirmOrderEvent>(_confirmOrder);
   }
   Future<void> _getAllMeet(
       GetAllMeetEvent event, Emitter<ProductsState> emit) async {
@@ -60,16 +61,17 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
   Future<void> _addToCart(AddToCart event, Emitter<ProductsState> emit) async {
     if (cartList.contains(event.product)) {
-      Logger().i('Product already in cart');
       var product =
           event.product.copyWith(quantity: event.product.quantity + 1);
       cartList.remove(event.product);
       cartList.add(product);
     } else {
-      Logger().i('Product added to cart');
       cartList.add(event.product);
     }
     emit(ProductsSuccess(cartList: []));
     emit(ProductsSuccess(cartList: cartList));
   }
+
+  Future<void> _confirmOrder(
+      ConfirmOrderEvent event, Emitter<ProductsState> emit) async {}
 }
