@@ -4,7 +4,7 @@ import 'package:h_food/features/products/domain/entities/products.dart';
 import 'package:h_food/features/products/presentation/bloc/products_bloc.dart';
 import 'package:h_food/features/products/presentation/bloc/products_event.dart';
 import 'package:h_food/features/products/presentation/bloc/products_state.dart';
-import 'package:h_food/features/products/presentation/screens/product_card.dart';
+import 'package:h_food/features/products/presentation/widgets/product_card.dart';
 
 class CreateOrderPage extends StatefulWidget {
   const CreateOrderPage({super.key, required this.totalCal});

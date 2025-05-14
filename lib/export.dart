@@ -15,7 +15,6 @@ export 'core/constants.dart';
 export 'package:h_food/core/extensions/string_extension.dart';
 export 'package:h_food/core/extensions/num_extension.dart';
 export 'package:h_food/core/extensions/context_extension.dart';
-export 'package:h_food/core/extensions/widget_extension.dart';
 
 // most used packages
 export 'package:h_food/core/app_router.dart';
