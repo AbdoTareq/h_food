@@ -6,7 +6,7 @@ import 'package:h_food/features/products/presentation/bloc/products_state.dart';
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final ProductsUsecase productsUsecase;
-  var meetList = <Product>[];
+  var meatList = <Product>[];
   var carbsList = <Product>[];
   var vegetablesList = <Product>[];
   var cartList = <Product>[];
@@ -28,8 +28,8 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     result.fold(
       (failure) => emit(ProductsError(message: failure.message)),
       (success) {
-        meetList = success.products;
-        emit(ProductsSuccess(meetList: success.products));
+        meatList = success.products;
+        emit(ProductsSuccess(meatList: success.products));
       },
     );
   }

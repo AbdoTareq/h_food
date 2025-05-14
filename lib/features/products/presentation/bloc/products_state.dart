@@ -1,8 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
-
 import 'package:h_food/features/products/domain/entities/products.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 abstract class ProductsState extends Equatable {
@@ -25,14 +24,14 @@ class ProductsError extends ProductsState {
 }
 
 class ProductsSuccess extends ProductsState {
-  final List<Product> meetList;
+  final List<Product> meatList;
   final List<Product> carbsList;
   final List<Product> vegetablesList;
   final List<Product> cartList;
   final Map orderResult;
 
   ProductsSuccess({
-    this.meetList = const [],
+    this.meatList = const [],
     this.carbsList = const [],
     this.vegetablesList = const [],
     this.cartList = const [],
@@ -40,7 +39,7 @@ class ProductsSuccess extends ProductsState {
   });
 
   @override
-  List<Object> get props => [meetList, carbsList, vegetablesList, cartList];
+  List<Object> get props => [meatList, carbsList, vegetablesList, cartList];
 
   ProductsSuccess copyWith({
     List<Product>? meetList,
@@ -50,7 +49,7 @@ class ProductsSuccess extends ProductsState {
     Map? orderResult,
   }) {
     return ProductsSuccess(
-      meetList: meetList ?? this.meetList,
+      meatList: meetList ?? meatList,
       carbsList: carbsList ?? this.carbsList,
       vegetablesList: vegetablesList ?? this.vegetablesList,
       cartList: cartList ?? this.cartList,

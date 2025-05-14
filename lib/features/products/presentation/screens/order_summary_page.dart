@@ -3,6 +3,7 @@ import 'package:h_food/features/products/domain/entities/products.dart';
 import 'package:h_food/features/products/presentation/bloc/products_bloc.dart';
 import 'package:h_food/features/products/presentation/bloc/products_event.dart';
 import 'package:h_food/features/products/presentation/bloc/products_state.dart';
+import 'package:h_food/features/products/presentation/screens/order_product_card.dart';
 import 'package:h_food/features/products/presentation/screens/product_card.dart';
 
 class OrderSummaryPage extends StatefulWidget {
@@ -66,6 +67,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
           if (state is ProductsSuccess) {
             if (state.orderResult['result'] != null &&
                 state.orderResult['result']) {
+              showSuccessSnack(message: context.t.orderIsSuccessful);
               context.pop();
             }
           }

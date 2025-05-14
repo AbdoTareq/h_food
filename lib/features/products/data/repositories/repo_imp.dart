@@ -19,7 +19,7 @@ class ProductsRepoImp implements ProductsRepo {
   Future<Either<Failure, Products>> getAllMeet() async {
     if (await networkInfo.isConnected) {
       try {
-        final res = await remoteDataSource.getAllMeet();
+        final res = await remoteDataSource.getAllMeat();
         return Right(res);
       } on ServerException {
         return Left(ServerFailure(message: 'server failure', data: null));

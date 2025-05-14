@@ -84,10 +84,10 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                         separatorBuilder: (context, index) => 8.widthBox,
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
-                        itemCount: productsBloc.meetList.length,
+                        itemCount: productsBloc.meatList.length,
                         itemBuilder: (context, index) {
                           return ProductCard(
-                            product: productsBloc.meetList[index],
+                            product: productsBloc.meatList[index],
                           );
                         },
                       ),

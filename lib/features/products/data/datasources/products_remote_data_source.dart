@@ -4,7 +4,7 @@ import 'package:h_food/core/network/network.dart';
 import 'package:h_food/features/products/data/models/products_wrapper.dart';
 
 abstract class ProductsRemoteDataSource {
-  Future<ProductsWrapper> getAllMeet();
+  Future<ProductsWrapper> getAllMeat();
   Future<ProductsWrapper> getAllCarbs();
   Future<ProductsWrapper> getAllVegetables();
   Future<Map<String, dynamic>> makeOrder(Map<String, dynamic> data);
@@ -16,7 +16,7 @@ class ProductsRemoteDataSourceImp implements ProductsRemoteDataSource {
   ProductsRemoteDataSourceImp({required this.network});
 
   @override
-  Future<ProductsWrapper> getAllMeet() async {
+  Future<ProductsWrapper> getAllMeat() async {
     final response = await network.get(Endpoints.meat, {});
     if (response.statusCode == 200) {
       return ProductsWrapper.fromJson({"data": response.data});
@@ -47,7 +47,11 @@ class ProductsRemoteDataSourceImp implements ProductsRemoteDataSource {
 
   @override
   Future<Map<String, dynamic>> makeOrder(Map<String, dynamic> data) async {
-    final response = await network.post(Endpoints.placeOrder, data);
+    final response = await network.post(
+      Endpoints.placeOrder,
+      data,
+      fullUrl: Endpoints.placeOrder,
+    );
     if (response.statusCode == 200) {
       return response.data;
     } else {

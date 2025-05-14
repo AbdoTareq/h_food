@@ -6,7 +6,7 @@ import '../../export.dart';
 
 abstract class NetworkInterface {
   Future<Response> get(String endPoint, dynamic body);
-  Future<Response> post(String endPoint, dynamic body);
+  Future<Response> post(String endPoint, dynamic body, {String? fullUrl});
   Future<Response> put(String endPoint, dynamic body);
   Future<Response> delete(String endPoint, dynamic body);
 }
@@ -50,9 +50,10 @@ class Network implements NetworkInterface {
   }
 
   @override
-  Future<Response> post(String endPoint, dynamic body) async {
+  Future<Response> post(String endPoint, dynamic body,
+      {String? fullUrl}) async {
     return _req(() {
-      return dio.post(Endpoints.baseUrl + endPoint,
+      return dio.post(fullUrl ?? (Endpoints.baseUrl + endPoint),
           data: body, options: Options(headers: headers));
     });
   }
